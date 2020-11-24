@@ -7,19 +7,24 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
 import com.bingoloves.plugin_core.core.ActivityInterface;
 import com.bingoloves.plugin_core.skin.entity.DynamicAttr;
 import com.bingoloves.plugin_core.skin.listener.IDynamicNewView;
 import com.bingoloves.plugin_core.skin.listener.ISkinUpdate;
 import com.bingoloves.plugin_core.skin.loader.SkinInflaterFactory;
 import com.bingoloves.plugin_core.skin.loader.SkinManager;
+
 import java.util.List;
 
 import static com.bingoloves.plugin_core.proxy.ProxyActivity.EXT_CLASS_NAME;
 
 @SuppressLint("Registered")
-public class BaseActivity extends Activity implements ActivityInterface, ISkinUpdate, IDynamicNewView {
+public class BaseActivity extends FragmentActivity implements ActivityInterface, ISkinUpdate, IDynamicNewView {
 
     public Activity mHostActivity;
     public Activity selfActivity;
@@ -29,12 +34,13 @@ public class BaseActivity extends Activity implements ActivityInterface, ISkinUp
     private boolean isResponseOnSkinChanging = true;
 
     private SkinInflaterFactory mSkinInflaterFactory;
+
     @Override
     public void insertAppContext(Activity hostActivity) {
         mHostActivity = hostActivity;
     }
 
-    @SuppressLint("MissingSuperCall")
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (mHostActivity == null){
@@ -45,32 +51,31 @@ public class BaseActivity extends Activity implements ActivityInterface, ISkinUp
         getLayoutInflater().setFactory(mSkinInflaterFactory);
     }
 
-    @SuppressLint("MissingSuperCall")
     @Override
     public void onStart() {
         super.onStart();
     }
 
-    @SuppressLint("MissingSuperCall")
+
     @Override
     public void onResume() {
         super.onResume();
         SkinManager.getInstance().attach(this);
     }
 
-    @SuppressLint("MissingSuperCall")
+
     @Override
     public void onPause() {
         super.onPause();
     }
 
-    @SuppressLint("MissingSuperCall")
+
     @Override
     public void onStop() {
         super.onStop();
     }
 
-    @SuppressLint("MissingSuperCall")
+
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -12,7 +12,6 @@ import java.util.List;
 public class BaseFragment extends Fragment implements IDynamicNewView {
 	
 	private IDynamicNewView mIDynamicNewView;
-	private LayoutInflater mLayoutInflater;
 
 	@Override
 	public void onAttach(Context context) {
