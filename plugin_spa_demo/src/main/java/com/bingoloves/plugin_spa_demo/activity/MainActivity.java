@@ -100,6 +100,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
             }
         });
+        mViewPager.setCurrentItem(0);
     }
 
     @Override
@@ -120,11 +121,5 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     @Override
     public void onDrawerStateChanged(int i) {
 
-    }
-
-    @Override
-    protected void initImmersionBar() {
-        super.initImmersionBar();
-        ImmersionBar.with(this).statusBarDarkFont(true).init();
     }
 }

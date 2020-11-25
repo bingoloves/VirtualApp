@@ -58,7 +58,7 @@ public class FunctionsFragment extends BaseFragment {
     protected void initView() {
         customToolbar.setCenterTitle("分类");
         customToolbar.showBaseLine();
-        ImmersionBar.with(this).titleBar(customToolbar).init();
+        ImmersionBar.with(this).statusBarDarkFont(true).titleBar(customToolbar).init();
     }
 
     @Override

@@ -40,6 +40,6 @@ public class HomeFragment extends BaseFragment {
     protected void initView() {
         customToolbar.setCenterTitle("首页");
         customToolbar.showBaseLine();
-        ImmersionBar.with(this).titleBar(customToolbar).init();
+        ImmersionBar.with(this).statusBarDarkFont(true).titleBar(customToolbar).init();
     }
 }

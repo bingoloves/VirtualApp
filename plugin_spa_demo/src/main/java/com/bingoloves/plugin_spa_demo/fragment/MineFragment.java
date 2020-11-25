@@ -42,7 +42,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        ImmersionBar.with(this).titleBar(toolbar).init();
+        ImmersionBar.with(this).statusBarDarkFont(true).titleBar(toolbar).init();
         if(getActivity() instanceof AppCompatActivity){
             AppCompatActivity activity = (AppCompatActivity)getActivity();
             activity.setSupportActionBar(toolbar);
