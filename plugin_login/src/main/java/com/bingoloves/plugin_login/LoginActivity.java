@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.bingoloves.plugin_core.base.BaseActivity;
+import com.bingoloves.plugin_core.base.PluginActivity;
 import com.bingoloves.plugin_core.utils.log.LogUtils;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends PluginActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,4 +31,5 @@ public class LoginActivity extends BaseActivity {
         super.onStart();
         LogUtils.e("123");
     }
+
 }

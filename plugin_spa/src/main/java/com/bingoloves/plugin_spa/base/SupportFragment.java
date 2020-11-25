@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
-import com.bingoloves.plugin_core.base.BaseFragment;
 import com.bingoloves.plugin_core.skin.entity.DynamicAttr;
 import com.bingoloves.plugin_core.skin.listener.IDynamicNewView;
 import com.bingoloves.plugin_spa.ExtraTransaction;
@@ -42,10 +41,10 @@ public abstract class SupportFragment extends Fragment implements ISupportFragme
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mContentView == null ){
             mContentView = inflater.inflate(getContentView(), container, false);
-            initView();
         }
         return mContentView;
     }
+
     /**
      * 用于设置当前页面布局
      * @return

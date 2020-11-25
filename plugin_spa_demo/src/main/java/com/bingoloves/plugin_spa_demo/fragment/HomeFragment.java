@@ -1,15 +1,15 @@
 package com.bingoloves.plugin_spa_demo.fragment;
 
-import android.widget.Toast;
+import android.content.Intent;
 
 import com.bingoloves.plugin_core.widget.CustomToolbar;
-import com.bingoloves.plugin_spa.base.SupportFragment;
 import com.bingoloves.plugin_spa_demo.R;
+import com.bingoloves.plugin_spa_demo.activity.DetailActivity;
+import com.bingoloves.plugin_spa_demo.base.BaseFragment;
+import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by bingo on 2020/11/24.
@@ -21,25 +21,25 @@ import butterknife.Unbinder;
  * @UpdateDate: 2020/11/24
  */
 
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.toolbar)
     CustomToolbar customToolbar;
 
     @OnClick(R.id.btn_move_to_detail)
     public void clickEvent(){
-        Toast.makeText(_mActivity, "haha", Toast.LENGTH_SHORT).show();
-        _mActivity.start(DetailFragment.newInstance("详情"));
-    }
-    @Override
-    protected int getContentView() {
-        return R.layout.fragment_home;
-    }
-    @Override
-    protected void initView() {
-        super.initView();
-        customToolbar.setCenterTitle("首页");
-        customToolbar.showBaseLine();
+        startActivity(new Intent(getContext(), DetailActivity.class));
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_home;
+    }
+
+    @Override
+    protected void initView() {
+        customToolbar.setCenterTitle("首页");
+        customToolbar.showBaseLine();
+        ImmersionBar.with(this).titleBar(customToolbar).init();
+    }
 }

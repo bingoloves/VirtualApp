@@ -2,9 +2,9 @@ package com.bingoloves.plugin_login;
 
 import android.os.Bundle;
 
-import com.bingoloves.plugin_core.base.BaseActivity;
+import com.bingoloves.plugin_core.base.PluginActivity;
 
-public class TestActivity extends BaseActivity {
+public class TestActivity extends PluginActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -9,7 +9,7 @@ import com.bingoloves.plugin_core.skin.entity.DynamicAttr;
 import com.bingoloves.plugin_core.skin.listener.IDynamicNewView;
 import java.util.List;
 
-public class BaseFragment extends Fragment implements IDynamicNewView {
+public class PluginFragment extends Fragment implements IDynamicNewView {
 	
 	private IDynamicNewView mIDynamicNewView;
 

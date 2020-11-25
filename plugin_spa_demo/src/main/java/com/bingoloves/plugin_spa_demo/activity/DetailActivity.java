@@ -1,7 +1,6 @@
-package com.bingoloves.plugin_spa_demo.fragment;
+package com.bingoloves.plugin_spa_demo.activity;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,8 +8,10 @@ import android.support.v7.widget.Toolbar;
 
 import com.bingoloves.plugin_core.adapter.recyclerview.CommonAdapter;
 import com.bingoloves.plugin_core.adapter.recyclerview.base.ViewHolder;
-import com.bingoloves.plugin_core.widget.CustomToolbar;
+import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_spa_demo.R;
+import com.bingoloves.plugin_spa_demo.base.BaseActivity;
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +27,9 @@ import butterknife.BindView;
  * @UpdateUser: 更新者
  * @UpdateDate: 2020/11/24
  */
-public class DetailFragment extends BaseFragment{
-
-    public static DetailFragment newInstance(String title) {
-        DetailFragment fragment = new DetailFragment();
-        Bundle bundle = new Bundle();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
+public class DetailActivity extends BaseActivity {
+    @BindView(R.id.appbar)
+    AppBarLayout appBarLayout;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.toolbar)
@@ -42,25 +38,42 @@ public class DetailFragment extends BaseFragment{
     RecyclerView recyclerView;
 
     @Override
-    protected int getContentView() {
-        return R.layout.fragment_detail;
+    protected int getLayoutId() {
+        return R.layout.activity_detail;
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        ImmersionBar.with(this).titleBar(mToolbar).init();
     }
 
     @Override
     protected void initView() {
-        super.initView();
         collapsingToolbar.setTitle("Title");
         //mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         List<String> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             list.add("商品"+i);
         }
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(new CommonAdapter<String>(getContext(),R.layout.layout_list_item,list) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new CommonAdapter<String>(this,R.layout.layout_list_item,list) {
             @Override
             protected void convert(ViewHolder holder, String item, int position) {
                 holder.setText(R.id.tv_item_name,item);
             }
+        });
+
+        //verticalOffset是当前appbarLayout的高度与最开始appbarlayout高度的差，向上滑动的话是负数
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            //通过日志得出活动启动是两次，由于之前有setExpanded所以三次
+            LogUtils.e("verticalOffset = " + verticalOffset);
+            LogUtils.e("appBarLayout = " + appBarLayout.getHeight());
         });
     }
 }

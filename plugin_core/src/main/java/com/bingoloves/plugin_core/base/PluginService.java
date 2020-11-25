@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.bingoloves.plugin_core.core.ServiceInterface;
 
-public class BaseService extends Service implements ServiceInterface {
+public class PluginService extends Service implements ServiceInterface {
 
     public Service mAppService;
 

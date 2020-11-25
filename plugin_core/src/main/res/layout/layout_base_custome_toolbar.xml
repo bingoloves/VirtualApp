@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/custom_toolbar_bg_rl"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
     android:layout_height="44dp">
 
     <ImageView

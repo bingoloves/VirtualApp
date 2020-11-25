@@ -12,9 +12,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -207,6 +209,27 @@ public final class Utils {
     public static int px2dip(Context context, float pxValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
+    }
+
+    /**
+     * 获取屏幕宽高
+     * @param window
+     * @return
+     */
+    public static Integer[] getWidthAndHeight(Window window) {
+        if (window == null) {
+            return null;
+        }
+        Integer[] integer = new Integer[2];
+        DisplayMetrics dm = new DisplayMetrics();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            window.getWindowManager().getDefaultDisplay().getRealMetrics(dm);
+        } else {
+            window.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        }
+        integer[0] = dm.widthPixels;
+        integer[1] = dm.heightPixels;
+        return integer;
     }
 
     /**

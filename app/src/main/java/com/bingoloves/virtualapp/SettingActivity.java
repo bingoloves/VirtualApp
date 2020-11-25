@@ -2,15 +2,12 @@ package com.bingoloves.virtualapp;
 
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
 import com.bingoloves.plugin_core.adapter.listview.CommonAdapter;
 import com.bingoloves.plugin_core.adapter.listview.ViewHolder;
-import com.bingoloves.plugin_core.base.BaseActivity;
+import com.bingoloves.plugin_core.base.PluginActivity;
 import com.bingoloves.plugin_core.skin.entity.SkinInfo;
 import com.bingoloves.plugin_core.skin.listener.ILoaderListener;
 import com.bingoloves.plugin_core.skin.loader.SkinManager;
@@ -22,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingActivity extends BaseActivity {
+public class SettingActivity extends PluginActivity {
 	private GridView gridView;
 	private CommonAdapter<SkinInfo> adapter;
 	private List<SkinInfo> skinInfoList = new ArrayList<>();

@@ -3,6 +3,7 @@ package com.bingoloves.plugin_core.widget;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -75,11 +76,12 @@ public class CustomToolbar extends RelativeLayout {
         leftImg.setOnClickListener(listener);
     }
 
-    public void setBackground(int color) {
-        if (bgRl != null) {
-            bgRl.setBackgroundColor(color);
-        }
-    }
+//    public void setBackground(int color) {
+//        if (bgRl != null) {
+//            bgRl.setBackgroundColor(ActivityCompat.getColor(context,color));
+//        }
+//        setBackground();
+//    }
     /**
      * 设置左边按钮背景
      *
@@ -302,6 +304,16 @@ public class CustomToolbar extends RelativeLayout {
                 }
             }
 
+        }
+    }
+
+    /**
+     * 设置颜色
+     * @param color
+     */
+    public void setCenterTitleColor(int color){
+        if (centerTitleTv != null) {
+            centerTitleTv.setTextColor(ActivityCompat.getColor(context, color));
         }
     }
 

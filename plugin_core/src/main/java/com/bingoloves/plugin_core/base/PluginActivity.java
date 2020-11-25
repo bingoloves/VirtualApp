@@ -24,7 +24,7 @@ import java.util.List;
 import static com.bingoloves.plugin_core.proxy.ProxyActivity.EXT_CLASS_NAME;
 
 @SuppressLint("Registered")
-public class BaseActivity extends FragmentActivity implements ActivityInterface, ISkinUpdate, IDynamicNewView {
+public class PluginActivity extends AppCompatActivity implements ActivityInterface, ISkinUpdate, IDynamicNewView {
 
     public Activity mHostActivity;
     public Activity selfActivity;
@@ -40,16 +40,17 @@ public class BaseActivity extends FragmentActivity implements ActivityInterface,
         mHostActivity = hostActivity;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (mHostActivity == null){
-            super.onCreate(savedInstanceState);
-        }
-        selfActivity = this;
         mSkinInflaterFactory = new SkinInflaterFactory();
         getLayoutInflater().setFactory(mSkinInflaterFactory);
+        super.onCreate(savedInstanceState);
+//        if (mHostActivity == null){
+//            super.onCreate(savedInstanceState);
+//        }
+        selfActivity = this;
     }
+
 
     @Override
     public void onStart() {

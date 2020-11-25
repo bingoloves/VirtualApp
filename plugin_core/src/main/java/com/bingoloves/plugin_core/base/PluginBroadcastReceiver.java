@@ -7,7 +7,7 @@ import android.content.Intent;
 import com.bingoloves.plugin_core.core.BroadcastReceiverInterface;
 
 
-public class BaseBroadcastReceiver extends BroadcastReceiver implements BroadcastReceiverInterface {
+public class PluginBroadcastReceiver extends BroadcastReceiver implements BroadcastReceiverInterface {
 
     @Override
     public void onReceive(Context context, Intent intent) {

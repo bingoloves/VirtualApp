@@ -1,10 +1,19 @@
 package com.bingoloves.plugin_spa_demo.fragment;
 
+import android.view.View;
+
 import com.bingoloves.plugin_core.widget.CustomToolbar;
-import com.bingoloves.plugin_spa.base.SupportFragment;
 import com.bingoloves.plugin_spa_demo.R;
+import com.bingoloves.plugin_spa_demo.base.BaseFragment;
+import com.bingoloves.plugin_spa_demo.dialog.AlertDialogUtils;
+import com.bingoloves.plugin_spa_demo.dialog.BottomDialogFragment;
+import com.bingoloves.plugin_spa_demo.dialog.LeftDialogFragment;
+import com.bingoloves.plugin_spa_demo.dialog.RightDialogFragment;
+import com.bingoloves.plugin_spa_demo.dialog.TopDialogFragment;
+import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by bingo on 2020/11/24.
@@ -16,19 +25,44 @@ import butterknife.BindView;
  * @UpdateDate: 2020/11/24
  */
 
-public class FunctionsFragment extends BaseFragment{
+public class FunctionsFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     CustomToolbar customToolbar;
-
+    @OnClick({R.id.btn_top,R.id.btn_bottom,R.id.btn_left,R.id.btn_right,R.id.btn_center})
+    public void clickEvent(View view){
+        switch (view.getId()){
+            case R.id.btn_top:
+                TopDialogFragment topDialogFragment = new TopDialogFragment();
+                topDialogFragment.show(getChildFragmentManager(), TopDialogFragment.class.getSimpleName());
+                break;
+            case R.id.btn_bottom:
+                BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
+                bottomDialogFragment.show(getChildFragmentManager(), BottomDialogFragment.class.getSimpleName());
+                break;
+            case R.id.btn_left:
+                LeftDialogFragment leftDialogFragment = new LeftDialogFragment();
+                leftDialogFragment.show(getChildFragmentManager(), LeftDialogFragment.class.getSimpleName());
+                break;
+            case R.id.btn_right:
+                RightDialogFragment rightDialogFragment = new RightDialogFragment();
+                rightDialogFragment.show(getChildFragmentManager(), RightDialogFragment.class.getSimpleName());
+                break;
+            case R.id.btn_center:
+                AlertDialogUtils.show(getActivity(),null);
+                break;
+            default:
+                break;
+        }
+    }
     @Override
-    protected int getContentView() {
-        return R.layout.fragment_functions;
+    protected void initView() {
+        customToolbar.setCenterTitle("分类");
+        customToolbar.showBaseLine();
+        ImmersionBar.with(this).titleBar(customToolbar).init();
     }
 
     @Override
-    protected void initView() {
-        super.initView();
-        customToolbar.setCenterTitle("分类");
-        customToolbar.showBaseLine();
+    protected int getLayoutId() {
+        return R.layout.fragment_functions;
     }
 }

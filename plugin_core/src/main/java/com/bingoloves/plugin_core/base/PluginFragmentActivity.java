@@ -22,7 +22,7 @@ import java.util.List;
  * 
  * @author fengjun
  */
-public class BaseFragmentActivity extends FragmentActivity implements ISkinUpdate, IDynamicNewView {
+public class PluginFragmentActivity extends FragmentActivity implements ISkinUpdate, IDynamicNewView {
 	
 	/**
 	 * Whether response to skin changing after create
