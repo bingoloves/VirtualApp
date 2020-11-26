@@ -1,15 +1,18 @@
 package com.bingoloves.plugin_spa_demo.fragment;
 
-import android.content.Intent;
+import android.view.View;
 
+import com.bingoloves.plugin_core.utils.Utils;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.activity.DetailActivity;
 import com.bingoloves.plugin_spa_demo.base.BaseFragment;
+import com.bingoloves.plugin_spa_demo.bean.User;
+import com.bingoloves.plugin_spa_demo.dao.UserDao;
 import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bmob.v3.exception.BmobException;
 
 /**
  * Created by bingo on 2020/11/24.
@@ -27,8 +30,20 @@ public class HomeFragment extends BaseFragment {
     CustomToolbar customToolbar;
 
     @OnClick(R.id.btn_move_to_detail)
-    public void clickEvent(){
-        startActivity(new Intent(getContext(), DetailActivity.class));
+    public void clickEvent(View view){
+        //startActivity(new Intent(getContext(), DetailActivity.class));
+        Utils.snack(view, Utils.getLogDebug());
+//        UserDao.updateUser(new UserDao.Callback() {
+//            @Override
+//            public void onSucceed(User user) {
+//                toast("更新成功！"+user.getAvatar());
+//            }
+//
+//            @Override
+//            public void onError(BmobException e) {
+//                toast("更新失败！" + e.getMessage());
+//            }
+//        });
     }
 
     @Override

@@ -1,28 +1,45 @@
 package com.bingoloves.plugin_spa_demo.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.bingoloves.plugin_core.adapter.recyclerview.CommonAdapter;
+import com.bingoloves.plugin_core.adapter.recyclerview.base.ViewHolder;
+import com.bingoloves.plugin_core.http.MMKVHelper;
 import com.bingoloves.plugin_core.utils.Utils;
 import com.bingoloves.plugin_core.widget.CustomViewPager;
+import com.bingoloves.plugin_spa_demo.App;
+import com.bingoloves.plugin_spa_demo.Constants;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.adapter.BaseViewPagerAdapter;
 import com.bingoloves.plugin_spa_demo.base.BaseActivity;
+import com.bingoloves.plugin_spa_demo.bean.MenuItem;
 import com.bingoloves.plugin_spa_demo.bean.TabEntity;
+import com.bingoloves.plugin_spa_demo.bean.User;
+import com.bingoloves.plugin_spa_demo.dao.UserDao;
 import com.bingoloves.plugin_spa_demo.fragment.FunctionsFragment;
 import com.bingoloves.plugin_spa_demo.fragment.HomeFragment;
 import com.bingoloves.plugin_spa_demo.fragment.MineFragment;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 
 /**
@@ -32,13 +49,24 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawer;
-    //左侧抽屉View
-    @BindView(R.id.navigation_view)
-    LinearLayout mDrawerView;
     @BindView(R.id.viewPager)
     CustomViewPager mViewPager;
     @BindView(R.id.bottomTab)
     CommonTabLayout bottomTab;
+    //左侧抽屉View
+    @BindView(R.id.navigation_view)
+    LinearLayout mDrawerView;
+    @BindView(R.id.iv_avatar)
+    ImageView avatarIv;
+    @BindView(R.id.tv_name)
+    TextView userNameTv;
+    @BindView(R.id.tv_mail)
+    TextView emailTv;
+    @BindView(R.id.drawer_list_view)
+    RecyclerView drawerRecyclerView;
+    @BindView(R.id.tv_version)
+    TextView versionTv;
+
 
     private String[] mTitles = {"首页", "功能", "我的"};
     private int[] mIconUnselectIds = {R.mipmap.ic_tabbar_home, R.mipmap.ic_tabbar_functions, R.mipmap.ic_tabbar_mine};
@@ -67,8 +95,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
 
     @Override
     protected void initView() {
-        ViewGroup.LayoutParams layoutParams = mDrawerView.getLayoutParams();
-        layoutParams.width = Utils.getWidthAndHeight(getWindow())[0]*2/3;
+        initDrawerView();
         //mViewPager.setIsCanScroll(false);
         mViewPager.setAdapter(new BaseViewPagerAdapter(getSupportFragmentManager(),mFragments,mTitles));
         bottomTab.setTabData(mTabEntities);
@@ -101,6 +128,48 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             }
         });
         mViewPager.setCurrentItem(0);
+    }
+
+    /**
+     * 左侧抽屉数据
+     */
+    private void initDrawerView() {
+        ViewGroup.LayoutParams layoutParams = mDrawerView.getLayoutParams();
+        layoutParams.width = Utils.getWidthAndHeight(getWindow())[0]*2/3;
+        //当前登录用户信息
+        User currentUser = UserDao.getCurrentUser();
+        if (currentUser != null){
+            userNameTv.setText(currentUser.getUsername());
+            RequestOptions requestOptions = new RequestOptions().optionalCircleCrop();
+            Glide.with(this).asBitmap().apply(requestOptions).load(currentUser.getAvatar()).into(avatarIv);
+        }
+        drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        drawerRecyclerView.setAdapter(new CommonAdapter<MenuItem>(this,R.layout.layout_list_item,getMenuList()) {
+            @Override
+            protected void convert(ViewHolder holder, MenuItem menu, int position) {
+                holder.setText(R.id.tv_menu_name,menu.name);
+                holder.setImageResource(R.id.iv_menu_icon,menu.menuIcon);
+                holder.itemView.setOnClickListener(menu.clickListener);
+            }
+        });
+    }
+
+    /**
+     * 加载默认的侧边栏菜单
+     * @return
+     */
+    private List<MenuItem> getMenuList() {
+        List<MenuItem> result = new ArrayList<>();
+        result.add(new MenuItem(R.mipmap.ic_apply_person, "个人中心", v -> { }));
+        result.add(new MenuItem(R.mipmap.ic_music, "音乐", v -> { }));
+        result.add(new MenuItem(R.mipmap.ic_appstore, "组件", v -> { }));
+        result.add(new MenuItem(R.mipmap.ic_quit, "退出登录", v -> {
+            UserDao.logOut();
+            App.isLogin = false;
+            MMKVHelper.removeKey(Constants.IS_LOGIN);
+            startActivity(new Intent(mActivity,LoginActivity.class)); finish();
+        }));
+        return result;
     }
 
     @Override

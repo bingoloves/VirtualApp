@@ -11,13 +11,50 @@ ext {
             butterknife             : "8.8.1",
             constraint              : "2.0.4",
             retrofitSdkVersion      : "2.4.0",
-            dagger2SdkVersion       : "2.6"
+            dagger2SdkVersion       : "2.6",
+            glide                   : "4.8.0"
     ]
     // 依赖
     dependencies  = [
-            suport : [
-                    appcompat   : "com.android.support:appcompat-v7:${version.supportSdkVersion}",
-                    recyclerview: "com.android.support:recyclerview-v7:${version.supportSdkVersion}"
-            ]
+           //原生组件支持
+           appcompat                : "com.android.support:appcompat-v7:${version.supportSdkVersion}",
+           recyclerview             : "com.android.support:recyclerview-v7:${version.supportSdkVersion}",
+           design                   : "com.android.support:design:${version.supportSdkVersion}",
+           supportV4                : "com.android.support:support-v4:${version.supportSdkVersion}",
+           cardview                 : "com.android.support:cardview-v7:${version.supportSdkVersion}",
+           annotations              : "com.android.support:support-annotations:${version.supportSdkVersion}",
+           constraint               : "com.android.support.constraint:constraint-layout:${version.constraint}",
+           //三方组件支持
+           glide                    : "com.github.bumptech.glide:glide:${version.glide}",          //glide图片加载
+           glideCompiler            : "com.github.bumptech.glide:compiler:${version.glide}",
+           butterknife              : "com.jakewharton:butterknife:${version.butterknife}",
+           butterknifeCompiler      : "com.jakewharton:butterknife-compiler:${version.butterknife}",
+           flycoTabLayout           : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
+           calendar                 : "com.haibin:calendarview:3.6.8",                             //日历组件
+           smartRefresh             : "com.scwang.smart:refresh-layout-kernel:2.0.1",              //刷新库 SmartRefreshLayout
+           smartRefreshHeader       : "com.scwang.smart:refresh-header-classics:2.0.1",
+           swipeLayout              : "com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0",            //侧滑删除
+           androidEventbus          : "org.simple:androideventbus:1.0.5.1",                        //Android EventBus
+           immersionbar             : "com.gyf.immersionbar:immersionbar:3.0.0",                   //沉浸式状态栏
+           mmkv                     : "com.tencent:mmkv:1.0.19",                                   //替代SharedPreferences的高效缓存库(推荐)
+           luban                    : "top.zibin:Luban:1.1.8",                                     //鲁班压缩算法处理(推荐)
+           litepal                  : "org.litepal.guolindev:core:3.2.2",                          //郭霖对原生数据库的封装
+           banner                   : "com.youth.banner:banner:1.4.10",                            //banner组件
+           //Rx系列
+           rxjava                   : "io.reactivex.rxjava2:rxjava:2.2.3",
+           rxandroid                : "io.reactivex.rxjava2:rxandroid:2.1.0",
+           rxbinding                : "com.jakewharton.rxbinding2:rxbinding:2.0.0",
+           rxlifecycle              : "com.trello.rxlifecycle2:rxlifecycle:2.2.2",                 //rx系列与View生命周期同步
+           rxlifecycleComponents    : "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
+           rxpermissions            : "com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar",      //rx 6.0权限请求
+           //网络框架
+           "retrofit"               : "com.squareup.retrofit2:retrofit:${version.retrofitSdkVersion}",
+           "retrofit-converter-gson": "com.squareup.retrofit2:converter-gson:${version.retrofitSdkVersion}",
+           "retrofit-adapter-rxjava": "com.squareup.retrofit2:adapter-rxjava2:${version.retrofitSdkVersion}",
+           "converter-scalars"      : "com.squareup.retrofit2:converter-scalars:${version.retrofitSdkVersion}",
+           "logging-interceptor"    : "com.squareup.okhttp3:logging-interceptor:3.8.0",
+           "gson"                   : "com.google.code.gson:gson:2.8.5",
+           "okhttp3"                : "com.squareup.okhttp3:okhttp:3.10.0",
+
     ]
 }

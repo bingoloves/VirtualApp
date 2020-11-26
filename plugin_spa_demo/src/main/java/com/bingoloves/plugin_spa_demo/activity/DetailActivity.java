@@ -65,7 +65,7 @@ public class DetailActivity extends BaseActivity {
         recyclerView.setAdapter(new CommonAdapter<String>(this,R.layout.layout_list_item,list) {
             @Override
             protected void convert(ViewHolder holder, String item, int position) {
-                holder.setText(R.id.tv_item_name,item);
+                holder.setText(R.id.tv_menu_name,item);
             }
         });
 

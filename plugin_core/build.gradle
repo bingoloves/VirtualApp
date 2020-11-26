@@ -1,24 +1,47 @@
 apply plugin: 'com.android.library'
 
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField("boolean","HTTP_LOG","true")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        release {
+            buildConfigField("boolean","HTTP_LOG","false")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    def deps = rootProject.ext.dependencies
+    implementation deps.appcompat
+    implementation deps.recyclerview
+    implementation deps.design
+    implementation deps.luban
+    implementation deps.mmkv
+    api(deps.rxandroid) {
+        exclude module: 'rxjava'
+    }
+    //网络模块
+    api deps["retrofit"]
+    api deps["retrofit-converter-gson"]
+    api deps["retrofit-adapter-rxjava"]
+    api deps["logging-interceptor"]
 }

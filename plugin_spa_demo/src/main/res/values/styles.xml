@@ -11,4 +11,14 @@
         <item name="android:windowBackground">@drawable/splash_logo_welcome</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <!-- 设置Menu菜单的背景色 -->
+        <item name="android:itemBackground">@android:color/black</item>
+        <!-- 设置Menu菜单的字体颜色 -->
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:colorBackground">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/black</item><!--主要是这个起作用,修改默认返回键的颜色-->
+        <!-- 设置Menu窗口不覆盖Toolbar视图 -->
+        <item name="overlapAnchor">false</item>
+    </style>
 </resources>

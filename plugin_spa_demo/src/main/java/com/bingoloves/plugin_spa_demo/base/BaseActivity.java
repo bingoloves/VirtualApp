@@ -2,6 +2,7 @@ package com.bingoloves.plugin_spa_demo.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.bingoloves.plugin_core.base.PluginActivity;
 import com.bingoloves.plugin_spa_demo.R;
@@ -58,6 +59,13 @@ public abstract class BaseActivity extends PluginActivity{
         ImmersionBar.with(this).navigationBarColor(R.color.colorPrimary).init();
     }
 
+    /**
+     * toast
+     * @param msg
+     */
+    protected void toast(String msg){
+        Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT).show();
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

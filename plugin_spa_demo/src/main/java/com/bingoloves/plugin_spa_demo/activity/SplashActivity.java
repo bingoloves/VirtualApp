@@ -1,5 +1,6 @@
 package com.bingoloves.plugin_spa_demo.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,8 +8,10 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.base.BaseActivity;
+import com.bingoloves.plugin_spa_demo.utils.PermissionsUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,6 +24,7 @@ public class SplashActivity extends BaseActivity {
     TextView closeTv;
     @OnClick(R.id.tv_close)
     public void clickEvent(){
+        startActivity(new Intent(mActivity,LoginActivity.class));
         finish();
     }
 
@@ -33,12 +37,27 @@ public class SplashActivity extends BaseActivity {
     protected void initData() {
 
     }
-
+    private String[] needPermissions = {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.CAMERA
+    };
     @Override
     protected void initView() {
-        new Handler().postDelayed(() -> {
-            startActivity(new Intent(mActivity,MainActivity.class));
-            finish();
-        },2000);
+        PermissionsUtils.request(this, needPermissions, accept -> {
+            if (!accept){
+                PermissionsUtils.gotoPermissionSetting(mActivity);
+            } else {
+                new Handler().postDelayed(() -> {
+                    if (App.isLogin){
+                        startActivity(new Intent(mActivity,MainActivity.class));
+                    } else {
+                        startActivity(new Intent(mActivity,LoginActivity.class));
+                    }finish();
+                },1500);
+            }
+        });
     }
 }

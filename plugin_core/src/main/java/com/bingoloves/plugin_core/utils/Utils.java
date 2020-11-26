@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
+import com.bingoloves.plugin_core.BuildConfig;
 import com.bingoloves.plugin_core.utils.log.LogUtils;
 
 import org.json.JSONArray;
@@ -435,5 +437,15 @@ public final class Utils {
                 e.printStackTrace();
             }
         }
+    }
+    //常用操作
+    public static void snack(View view,String msg){
+        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
+    }
+    public static void snack(View view,String msg,int duration){
+        Snackbar.make(view, msg, duration).show();
+    }
+    public static String getLogDebug(){
+        return String.valueOf(BuildConfig.HTTP_LOG);
     }
 }

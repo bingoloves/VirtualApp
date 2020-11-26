@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RadiusImageView">
+        <!--边框宽度，默认：0-->
+        <attr name="riv_border_width" format="dimension" />
+        <!--边框的颜色，默认：Color.GRAY-->
+        <attr name="riv_border_color" format="color" />
+        <!--选中时，覆盖在图片上的图层颜色，默认：Color.TRANSPARENT-->
+        <attr name="riv_selected_mask_color" format="color" />
+        <!--边框选中时的颜色，默认：Color.GRAY-->
+        <attr name="riv_selected_border_color" format="color" />
+        <!--边框选中时的宽度，默认：0-->
+        <attr name="riv_selected_border_width" format="dimension" />
+        <!--圆角的大小，默认0-->
+        <attr name="riv_corner_radius" format="dimension" />
+        <!--是否是椭圆形，默认：false-->
+        <attr name="riv_is_oval" format="boolean" />
+        <!--图片是否是圆形的，默认：false-->
+        <attr name="riv_is_circle" format="boolean" />
+        <!--图片是否可触摸选中，默认：true-->
+        <attr name="riv_is_touch_select_mode_enabled" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="XUILayout">
+        <attr name="android:maxWidth" />
+        <attr name="android:maxHeight" />
+        <attr name="android:minWidth" />
+        <attr name="android:minHeight" />
+        <!--底部分割线的高度，默认0-->
+        <attr name="xui_bottomDividerHeight" format="dimension" />
+        <!--底部分割线的颜色，默认R.attr.xui_config_color_separator_light-->
+        <attr name="xui_bottomDividerColor" format="color|reference" />
+        <!--底部分割线左侧的边距，默认0-->
+        <attr name="xui_bottomDividerInsetLeft" format="dimension" />
+        <!--底部分割线右侧的边距，默认0-->
+        <attr name="xui_bottomDividerInsetRight" format="dimension" />
+        <!--顶部分割线的高度，默认0-->
+        <attr name="xui_topDividerHeight" format="dimension" />
+        <!--顶部分割线的颜色，默认R.attr.xui_config_color_separator_light-->
+        <attr name="xui_topDividerColor" format="color|reference" />
+        <!--顶部分割线左侧的边距，默认0-->
+        <attr name="xui_topDividerInsetLeft" format="dimension" />
+        <!--顶部分割线右侧的边距，默认0-->
+        <attr name="xui_topDividerInsetRight" format="dimension" />
+        <!--左侧分割线的高度，默认0-->
+        <attr name="xui_leftDividerWidth" format="dimension" />
+        <!--左侧分割线的颜色，默认R.attr.xui_config_color_separator_light-->
+        <attr name="xui_leftDividerColor" format="color|reference" />
+        <!--左侧分割线顶部的边距，默认0-->
+        <attr name="xui_leftDividerInsetTop" format="dimension" />
+        <!--左侧分割线底部的边距，默认0-->
+        <attr name="xui_leftDividerInsetBottom" format="dimension" />
+        <!--右侧分割线的高度，默认0-->
+        <attr name="xui_rightDividerWidth" format="dimension" />
+        <!--右侧分割线的颜色，默认R.attr.xui_config_color_separator_light-->
+        <attr name="xui_rightDividerColor" format="color|reference" />
+        <!--右侧分割线顶部的边距，默认0-->
+        <attr name="xui_rightDividerInsetTop" format="dimension" />
+        <!--右侧分割线底部的边距，默认0-->
+        <attr name="xui_rightDividerInsetBottom" format="dimension" />
+        <!--圆角度数，默认0-->
+        <attr name="xui_radius" format="dimension" />
+        <!--边框颜色，默认0-->
+        <attr name="xui_borderColor" format="color" />
+        <!--边框宽度，默认1px-->
+        <attr name="xui_borderWidth" format="dimension" />
+        <!--21版本下，裁剪圆角边框的镂空颜色-->
+        <attr name="xui_outerNormalColor" format="color|reference" />
+        <!--隐藏圆角的类型，默认none-->
+        <attr name="xui_hideRadiusSide" format="enum">
+            <enum name="none" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+            <enum name="left" value="4" />
+        </attr>
+        <!--是否显示边框-->
+        <attr name="xui_showBorderOnlyBeforeL" format="boolean" />
+        <!--阴影的大小，默认0-->
+        <attr name="xui_shadowElevation" format="dimension" />
+        <!--是否使用主题的阴影大小，默认是false,主题默认阴影大小是14dp-->
+        <attr name="xui_useThemeGeneralShadowElevation" format="boolean" />
+        <!--阴影的透明度，默认0.25-->
+        <attr name="xui_shadowAlpha" format="float" />
+        <!--轮廓的顶部边距-->
+        <attr name="xui_outlineInsetTop" format="dimension" />
+        <!--轮廓的左侧边距-->
+        <attr name="xui_outlineInsetLeft" format="dimension" />
+        <!--轮廓的右侧边距-->
+        <attr name="xui_outlineInsetRight" format="dimension" />
+        <!--轮廓的底部边距-->
+        <attr name="xui_outlineInsetBottom" format="dimension" />
+        <!--轮廓是否使用内边距-->
+        <attr name="xui_outlineExcludePadding" format="boolean" />
+    </declare-styleable>
+    <!-- MarqueeView -->
+    <declare-styleable name="MarqueeView">
+        <!--翻页的间隔-->
+        <attr name="mq_interval" format="integer" />
+        <!--动画的间隔-->
+        <attr name="mq_animDuration" format="integer" />
+        <!--动画的样式资源-->
+        <attr name="mq_animIn" format="reference" />
+        <attr name="mq_animOut" format="reference" />
+    </declare-styleable>
+
+    <!--SuperButton-->
+    <declare-styleable name="SuperButton">
+        <attr name="sGravity" format="enum">
+            <enum name="center" value="0" />
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="top" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+        <attr name="sShapeType" format="enum">
+            <enum name="rectangle" value="0" />
+            <enum name="oval" value="1" />
+            <enum name="line" value="2" />
+            <enum name="ring" value="3" />
+        </attr>
+        <attr name="sSolidColor" format="color" />
+        <attr name="sSelectorPressedColor" format="color" />
+        <attr name="sSelectorDisableColor" format="color" />
+        <attr name="sSelectorNormalColor" format="color" />
+        <attr name="sCornersRadius" format="dimension" />
+        <attr name="sCornersTopLeftRadius" format="dimension" />
+        <attr name="sCornersTopRightRadius" format="dimension" />
+        <attr name="sCornersBottomLeftRadius" format="dimension" />
+        <attr name="sCornersBottomRightRadius" format="dimension" />
+        <attr name="sStrokeWidth" format="dimension" />
+        <attr name="sStrokeDashWidth" format="dimension" />
+        <attr name="sStrokeDashGap" format="dimension" />
+        <attr name="sStrokeColor" format="color" />
+        <attr name="sSizeWidth" format="dimension" />
+        <attr name="sSizeHeight" format="dimension" />
+        <attr name="sGradientOrientation" format="enum">
+            <enum name="TOP_BOTTOM" value="0" />
+            <enum name="TR_BL" value="1" />
+            <enum name="RIGHT_LEFT" value="2" />
+            <enum name="BR_TL" value="3" />
+            <enum name="BOTTOM_TOP" value="4" />
+            <enum name="BL_TR" value="5" />
+            <enum name="LEFT_RIGHT" value="6" />
+            <enum name="TL_BR" value="7" />
+        </attr>
+        <attr name="sGradientAngle" format="dimension" />
+        <attr name="sGradientCenterX" format="dimension" />
+        <attr name="sGradientCenterY" format="dimension" />
+        <attr name="sGradientGradientRadius" format="dimension" />
+        <attr name="sGradientStartColor" format="color" />
+        <attr name="sGradientCenterColor" format="color" />
+        <attr name="sGradientEndColor" format="color" />
+        <attr name="sGradientUseLevel" format="boolean" />
+        <attr name="sUseSelector" format="boolean" />
+        <attr name="sGradientType" format="enum">
+            <enum name="linear" value="0" />
+            <enum name="radial" value="1" />
+            <enum name="sweep" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <!--可以设置最大高度的RecyclerView-->
+    <declare-styleable name="MaxHeightRecyclerView">
+        <attr name="maxHeight" format="dimension" />
+    </declare-styleable>
+</resources>
