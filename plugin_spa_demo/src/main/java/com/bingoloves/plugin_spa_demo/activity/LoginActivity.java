@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.cqs.im.base.BaseActivity;
+import cn.cqs.im.model.UserModel;
 
 /**
  * Created by bingo on 2020/11/26.
