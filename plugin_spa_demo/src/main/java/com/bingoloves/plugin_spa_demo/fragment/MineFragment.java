@@ -6,21 +6,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseFragment;
 import com.gyf.immersionbar.ImmersionBar;
-
 import butterknife.BindView;
+import cn.cqs.im.base.BaseFragment;
 
 /**
  * Created by bingo on 2020/11/24.
@@ -46,7 +41,7 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.mIv)
     ImageView mIv;
     @BindView(R.id.playButton)
-    RelativeLayout playButton;
+    View playButton;
 
     @Override
     protected int getLayoutId() {

@@ -26,6 +26,7 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -61,11 +62,16 @@ dependencies {
     implementation deps.butterknife
     annotationProcessor deps.butterknifeCompiler
     implementation deps.gson
+    implementation deps.eventbus
     implementation deps.glide
     annotationProcessor deps.glideCompiler
+    //Bmob 后端云
     implementation 'cn.bmob.android:bmob-sdk:3.7.4'
-    //implementation project(':plugin_spa')
+    //Bmob IM
+    implementation 'cn.bmob.android:bmob-im:2.1.4@aar'
+
     implementation project(':plugin_core')
+    implementation project(':plugin_im')
     implementation project(':plugin_spa_skin_default')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

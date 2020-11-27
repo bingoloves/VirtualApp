@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,13 +23,11 @@ import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.Constants;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.adapter.BaseViewPagerAdapter;
-import com.bingoloves.plugin_spa_demo.base.BaseActivity;
 import com.bingoloves.plugin_spa_demo.bean.MenuItem;
 import com.bingoloves.plugin_spa_demo.bean.TabEntity;
 import com.bingoloves.plugin_spa_demo.bean.User;
 import com.bingoloves.plugin_spa_demo.dao.UserDao;
 import com.bingoloves.plugin_spa_demo.fragment.FunctionsFragment;
-import com.bingoloves.plugin_spa_demo.fragment.HomeFragment;
 import com.bingoloves.plugin_spa_demo.fragment.MineFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -36,11 +35,16 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
+import cn.bmob.newim.BmobIM;
+import cn.bmob.newim.listener.ConnectListener;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.cqs.im.activity.NewFriendActivity;
+import cn.cqs.im.base.BaseActivity;
+import cn.cqs.im.fragment.ConversationFragment;
 
 /**
  * 仿微信交互方式
@@ -87,7 +91,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             }
         }
         if (mFragments != null){
-            mFragments.add(new HomeFragment());
+            mFragments.add(new ConversationFragment());
             mFragments.add(new FunctionsFragment());
             mFragments.add(new MineFragment());
         }
@@ -128,6 +132,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             }
         });
         mViewPager.setCurrentItem(0);
+        connectIM();
     }
 
     /**
@@ -140,7 +145,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         User currentUser = UserDao.getCurrentUser();
         if (currentUser != null){
             userNameTv.setText(currentUser.getUsername());
-            RequestOptions requestOptions = new RequestOptions().optionalCircleCrop();
+            RequestOptions requestOptions = new RequestOptions().optionalCircleCrop().error(R.mipmap.head);
             Glide.with(this).asBitmap().apply(requestOptions).load(currentUser.getAvatar()).into(avatarIv);
         }
         drawerRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -161,6 +166,8 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private List<MenuItem> getMenuList() {
         List<MenuItem> result = new ArrayList<>();
         result.add(new MenuItem(R.mipmap.ic_apply_person, "个人中心", v -> { }));
+        result.add(new MenuItem(R.mipmap.ic_im, "聊天", v -> { }));
+        result.add(new MenuItem(R.mipmap.ic_add, "新朋友", v -> { startActivity(new Intent(mActivity, NewFriendActivity.class));}));
         result.add(new MenuItem(R.mipmap.ic_music, "音乐", v -> { }));
         result.add(new MenuItem(R.mipmap.ic_appstore, "组件", v -> { }));
         result.add(new MenuItem(R.mipmap.ic_quit, "退出登录", v -> {
@@ -191,4 +198,24 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     public void onDrawerStateChanged(int i) {
 
     }
+
+    /**
+     * 连接IM 服务
+     */
+    private void connectIM(){
+        User user = BmobUser.getCurrentUser(User.class);
+        if (!TextUtils.isEmpty(user.getObjectId())) {
+            BmobIM.connect(user.getObjectId(), new ConnectListener() {
+                @Override
+                public void done(String uid, BmobException e) {
+                    if (e == null) {
+                        toast("连接成功");
+                    } else {
+                        toast("连接失败:"+e.getMessage());
+                    }
+                }
+            });
+        }
+    }
+
 }

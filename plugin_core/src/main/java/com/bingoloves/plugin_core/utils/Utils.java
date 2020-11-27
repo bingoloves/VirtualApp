@@ -445,6 +445,19 @@ public final class Utils {
     public static void snack(View view,String msg,int duration){
         Snackbar.make(view, msg, duration).show();
     }
+
+    /**
+     * 检查是否安装了SD 卡
+     * @return
+     */
+    public static boolean checkSdCard() {
+        if (android.os.Environment.getExternalStorageState().equals(
+                android.os.Environment.MEDIA_MOUNTED)){
+            return true;
+        } else {
+            return false;
+        }
+    }
     public static String getLogDebug(){
         return String.valueOf(BuildConfig.HTTP_LOG);
     }

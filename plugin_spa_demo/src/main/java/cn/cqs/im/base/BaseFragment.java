@@ -1,4 +1,4 @@
-package com.bingoloves.plugin_spa_demo.base;
+package cn.cqs.im.base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bingoloves.plugin_core.base.PluginFragment;
-import com.bingoloves.plugin_core.utils.log.LogUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

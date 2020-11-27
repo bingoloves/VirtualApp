@@ -4,13 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import com.bingoloves.plugin_core.core.ActivityInterface;
 import com.bingoloves.plugin_core.skin.entity.DynamicAttr;
@@ -178,5 +182,26 @@ public class PluginActivity extends AppCompatActivity implements ActivityInterfa
     @Override
     public void dynamicAddView(View view, List<DynamicAttr> pDAttrs) {
         mSkinInflaterFactory.dynamicAddSkinEnableView(this, view, pDAttrs);
+    }
+
+    /**
+     * 隐藏软键盘
+     */
+    public void hideSoftInputView() {
+        InputMethodManager manager = ((InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE));
+        if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
+            if (getCurrentFocus() != null)
+                manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    /**隐藏软键盘-一般是EditText.getWindowToken()
+     * @param token
+     */
+    public void hideSoftInput(IBinder token) {
+        if (token != null) {
+            InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            im.hideSoftInputFromWindow(token,InputMethodManager.HIDE_NOT_ALWAYS);
+        }
     }
 }

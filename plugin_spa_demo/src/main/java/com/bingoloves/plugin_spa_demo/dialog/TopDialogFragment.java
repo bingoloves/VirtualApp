@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_core.widget.drag.DragLayout;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseDialogFragment;
 import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
+import com.bingoloves.plugin_spa_demo.fragment.BaseDialogFragment;
 
 /**
  * 顶部DialogFragment

@@ -40,10 +40,11 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:title="我的">
                 <!--自定义带图片的立即播放按钮-->
-                <RelativeLayout
+                <android.support.v7.widget.ButtonBarLayout
                     android:id="@+id/playButton"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:visibility="gone">
                     <ImageView
                         android:layout_width="28dp"
@@ -58,7 +59,7 @@
                         android:layout_gravity="center"
                         android:text="立即播放" />
 
-                </RelativeLayout>
+                </android.support.v7.widget.ButtonBarLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 

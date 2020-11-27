@@ -8,19 +8,17 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
-
 import com.bingoloves.plugin_core.http.MMKVHelper;
 import com.bingoloves.plugin_core.utils.Utils;
 import com.bingoloves.plugin_core.utils.log.LogUtils;
-import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.Constants;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseActivity;
 import com.bingoloves.plugin_spa_demo.bean.User;
 import com.bingoloves.plugin_spa_demo.dao.UserDao;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
+import cn.cqs.im.base.BaseActivity;
 
 /**
  * Created by bingo on 2020/11/26.

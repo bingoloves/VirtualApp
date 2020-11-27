@@ -1,4 +1,4 @@
-package com.bingoloves.plugin_spa_demo.base;
+package com.bingoloves.plugin_spa_demo.fragment;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ImageView;
 
 import com.bingoloves.plugin_core.utils.Utils;
 import com.bingoloves.plugin_spa_demo.R;

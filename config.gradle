@@ -30,6 +30,7 @@ ext {
            butterknife              : "com.jakewharton:butterknife:${version.butterknife}",
            butterknifeCompiler      : "com.jakewharton:butterknife-compiler:${version.butterknife}",
            flycoTabLayout           : "com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar",
+           eventbus                 : "org.greenrobot:eventbus:3.0.0",                             //eventbus
            calendar                 : "com.haibin:calendarview:3.6.8",                             //日历组件
            smartRefresh             : "com.scwang.smart:refresh-layout-kernel:2.0.1",              //刷新库 SmartRefreshLayout
            smartRefreshHeader       : "com.scwang.smart:refresh-header-classics:2.0.1",

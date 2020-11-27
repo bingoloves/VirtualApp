@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:minHeight="75dp">
+
+        <ImageView
+            android:id="@+id/iv_recent_avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="16dp"
+            android:src="@mipmap/head" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1.0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_recent_name"
+                android:layout_width="wrap_content"
+                android:layout_height="25.0dip"
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="18dp"
+                android:layout_gravity="left|center"
+                android:layout_toRightOf="@id/iv_recent_avatar"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textSize="16sp"
+                android:textColor="#3e3e39"
+                />
+
+            <TextView
+                android:id="@+id/tv_recent_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_gravity="left|center"
+                android:textColor="#9fa0a0"
+                android:layout_below="@id/tv_recent_name"
+                android:layout_toRightOf="@id/iv_recent_avatar"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <com.bingoloves.plugin_core.widget.SuperButton
+            android:id="@+id/btn_aggree"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="同意"
+            android:padding="0dp"
+            app:sSelectorNormalColor="#4699F6"
+            app:sSelectorPressedColor="#387AC5"
+            app:sSelectorDisableColor="#D6DDE1"
+            app:sUseSelector="true"
+            app:sCornersRadius="4dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="75dp"
+        android:background="#dadada" >
+    </View>
+
+</RelativeLayout>

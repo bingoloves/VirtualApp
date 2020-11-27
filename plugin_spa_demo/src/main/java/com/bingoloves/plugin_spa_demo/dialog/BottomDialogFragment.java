@@ -3,9 +3,8 @@ package com.bingoloves.plugin_spa_demo.dialog;
 import android.content.res.Configuration;
 import android.view.Gravity;
 import android.view.ViewGroup;
-
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseDialogFragment;
+import com.bingoloves.plugin_spa_demo.fragment.BaseDialogFragment;
 
 /**
  * 底部DialogFragment

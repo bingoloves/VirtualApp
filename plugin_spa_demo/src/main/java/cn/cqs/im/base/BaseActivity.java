@@ -1,14 +1,13 @@
-package com.bingoloves.plugin_spa_demo.base;
+package cn.cqs.im.base;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.bingoloves.plugin_core.base.PluginActivity;
-import com.bingoloves.plugin_spa_demo.R;
 import com.gyf.immersionbar.ImmersionBar;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import cn.cqs.im.R;
 
 /**
  * Created by bingo on 2020/11/25.
@@ -56,7 +55,7 @@ public abstract class BaseActivity extends PluginActivity{
      * Init immersion bar.
      */
     protected void initImmersionBar() {
-        ImmersionBar.with(this).navigationBarColor(R.color.colorPrimary).init();
+        ImmersionBar.with(this).init();
     }
 
     /**

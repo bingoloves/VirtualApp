@@ -1,11 +1,19 @@
 package com.bingoloves.plugin_spa_demo;
 
 import android.app.Application;
-
 import com.bingoloves.plugin_core.http.MMKVHelper;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.ClassicsHeader;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
+import cn.bmob.newim.BmobIM;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobConfig;
+import cn.cqs.im.DemoMessageHandler;
 
 /**
  * Created by bingo on 2020/11/25.
@@ -56,5 +64,36 @@ public class App extends Application{
                 .setFileExpiration(5500)
                 .build();
         Bmob.initialize(config);
+
+        if (getApplicationInfo().packageName.equals(getMyProcessName())){
+            BmobIM.init(this);
+            BmobIM.registerDefaultMessageHandler(new DemoMessageHandler(this));
+        }
+    }
+    /**
+     * 获取当前运行的进程名
+     * @return
+     */
+    public static String getMyProcessName() {
+        try {
+            File file = new File("/proc/" + android.os.Process.myPid() + "/" + "cmdline");
+            BufferedReader mBufferedReader = new BufferedReader(new FileReader(file));
+            String processName = mBufferedReader.readLine().trim();
+            mBufferedReader.close();
+            return processName;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    /**
+     * SmartRefresh 刷新库全局配置头部
+     * static 代码段可以防止内存泄露
+     */
+    static {
+        //设置全局的Header构建器
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> new ClassicsHeader(context).setArrowResource(R.drawable.ic_arrow_down_default).setEnableLastTime(false));
+        //设置全局的Footer构建器
+        SmartRefreshLayout.setDefaultRefreshFooterCreator((context, layout) ->  new ClassicsFooter(context).setDrawableSize(20));
     }
 }

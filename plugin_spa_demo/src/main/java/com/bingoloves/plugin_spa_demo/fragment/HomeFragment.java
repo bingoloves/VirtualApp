@@ -5,14 +5,10 @@ import android.view.View;
 import com.bingoloves.plugin_core.utils.Utils;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseFragment;
-import com.bingoloves.plugin_spa_demo.bean.User;
-import com.bingoloves.plugin_spa_demo.dao.UserDao;
 import com.gyf.immersionbar.ImmersionBar;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.bmob.v3.exception.BmobException;
+import cn.cqs.im.base.BaseFragment;
 
 /**
  * Created by bingo on 2020/11/24.

@@ -4,16 +4,15 @@ import android.view.View;
 
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseFragment;
 import com.bingoloves.plugin_spa_demo.dialog.AlertDialogUtils;
 import com.bingoloves.plugin_spa_demo.dialog.BottomDialogFragment;
 import com.bingoloves.plugin_spa_demo.dialog.LeftDialogFragment;
 import com.bingoloves.plugin_spa_demo.dialog.RightDialogFragment;
 import com.bingoloves.plugin_spa_demo.dialog.TopDialogFragment;
 import com.gyf.immersionbar.ImmersionBar;
-
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.cqs.im.base.BaseFragment;
 
 /**
  * Created by bingo on 2020/11/24.

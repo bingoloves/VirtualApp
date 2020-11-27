@@ -20,6 +20,8 @@ allprojects {
         google()
         jcenter()
         maven { url "https://raw.github.com/bmob/bmob-android-sdk/master" }
+//        maven { url 'https://dl.bintray.com/chaozhouzhang/maven' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
 }
 

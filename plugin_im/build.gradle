@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+/**
+ * 将IM 相关的布局单独抽离出来
+ */
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def deps = rootProject.ext.dependencies
+    implementation deps.appcompat
+    implementation deps.recyclerview
+    implementation deps.smartRefresh
+    implementation deps.smartRefreshHeader
+    implementation project(':plugin_core')
+}

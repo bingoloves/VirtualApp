@@ -2,19 +2,16 @@ package com.bingoloves.plugin_spa_demo.activity;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseActivity;
 import com.bingoloves.plugin_spa_demo.utils.PermissionsUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.cqs.im.base.BaseActivity;
 
 public class SplashActivity extends BaseActivity {
 

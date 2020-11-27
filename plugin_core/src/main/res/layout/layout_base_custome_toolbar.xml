@@ -9,8 +9,9 @@
         android:id="@+id/custom_toolbar_left_img"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_left_black"/>
+        android:src="@drawable/ic_back"/>
 
     <TextView
         android:id="@+id/custom_toolbar_left_title_tv"
@@ -36,7 +37,7 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:maxWidth="80dp"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="40dp"
         android:layout_marginStart="30dp"
         android:textColor="#222222"
         android:textSize="14sp"

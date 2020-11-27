@@ -5,18 +5,17 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
 import com.bingoloves.plugin_core.adapter.recyclerview.CommonAdapter;
 import com.bingoloves.plugin_core.adapter.recyclerview.base.ViewHolder;
 import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.base.BaseActivity;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.cqs.im.base.BaseActivity;
 
 /**
  * Created by bingo on 2020/11/24.
