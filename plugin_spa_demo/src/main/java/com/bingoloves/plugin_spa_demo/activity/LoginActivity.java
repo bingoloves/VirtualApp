@@ -11,10 +11,13 @@ import android.widget.ImageView;
 import com.bingoloves.plugin_core.http.MMKVHelper;
 import com.bingoloves.plugin_core.utils.Utils;
 import com.bingoloves.plugin_core.utils.log.LogUtils;
+import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.Constants;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.bean.User;
 import com.bingoloves.plugin_spa_demo.dao.UserDao;
+import com.gyf.immersionbar.ImmersionBar;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
@@ -32,6 +35,8 @@ import cn.cqs.im.model.UserModel;
  */
 
 public class LoginActivity extends BaseActivity {
+    @BindView(R.id.toolbar)
+    CustomToolbar toolbar;
     @BindView(R.id.et_name)
     EditText nameEt;
     @BindView(R.id.et_password)
@@ -119,6 +124,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        ImmersionBar.with(this).titleBar(toolbar).statusBarDarkFont(true).init();
         //上次登录的账号密码直接填充
         String userNameCache = MMKVHelper.decodeString(Constants.LOGIN_USER_NAME);
         String passwordCache = MMKVHelper.decodeString(Constants.LOGIN_USER_PASSWORD);

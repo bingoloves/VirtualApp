@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.utils.PermissionsUtils;
+import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
