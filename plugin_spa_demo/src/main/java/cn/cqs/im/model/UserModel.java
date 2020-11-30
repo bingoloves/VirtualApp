@@ -18,8 +18,8 @@ import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.LogInListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import cn.cqs.im.model.i.QueryUserListener;
-import cn.cqs.im.model.i.UpdateCacheListener;
+import cn.cqs.im.listener.QueryUserListener;
+import cn.cqs.im.listener.UpdateCacheListener;
 
 /**
  * @author :smile
@@ -42,10 +42,9 @@ public class UserModel extends BaseModel {
      *
      * @param username
      * @param password
-     * @param pwdagain
      * @param listener
      */
-    public void register(String username, String password, String pwdagain, final LogInListener listener) {
+    public void register(String username, String password, final LogInListener listener) {
         if (TextUtils.isEmpty(username)) {
             listener.done(null, new BmobException(CODE_NULL, "请填写用户名"));
             return;
@@ -54,14 +53,14 @@ public class UserModel extends BaseModel {
             listener.done(null, new BmobException(CODE_NULL, "请填写密码"));
             return;
         }
-        if (TextUtils.isEmpty(pwdagain)) {
-            listener.done(null, new BmobException(CODE_NULL, "请填写确认密码"));
-            return;
-        }
-        if (!password.equals(pwdagain)) {
-            listener.done(null, new BmobException(CODE_NULL, "两次输入的密码不一致，请重新输入"));
-            return;
-        }
+//        if (TextUtils.isEmpty(pwdagain)) {
+//            listener.done(null, new BmobException(CODE_NULL, "请填写确认密码"));
+//            return;
+//        }
+//        if (!password.equals(pwdagain)) {
+//            listener.done(null, new BmobException(CODE_NULL, "两次输入的密码不一致，请重新输入"));
+//            return;
+//        }
         final User user = new User();
         user.setUsername(username);
         user.setPassword(password);
@@ -78,7 +77,7 @@ public class UserModel extends BaseModel {
     }
 
     /**
-     * TODO 用户管理：2.2、登录
+     * 用户管理：登录
      *
      * @param username
      * @param password
@@ -269,11 +268,10 @@ public class UserModel extends BaseModel {
 
     /**
      * 删除好友
-     *
+     * TODO 好友管理：9.3、删除好友
      * @param f
      * @param listener
      */
-    //TODO 好友管理：9.3、删除好友
     public void deleteFriend(Friend f, UpdateListener listener) {
         Friend friend = new Friend();
         friend.delete(f.getObjectId(), listener);

@@ -1,4 +1,4 @@
-package cn.cqs.im.model.i;
+package cn.cqs.im.listener;
 
 import cn.bmob.newim.listener.BmobListener1;
 import cn.bmob.v3.exception.BmobException;

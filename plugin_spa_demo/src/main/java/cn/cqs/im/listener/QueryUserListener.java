@@ -1,4 +1,4 @@
-package cn.cqs.im.model.i;
+package cn.cqs.im.listener;
 
 import com.bingoloves.plugin_spa_demo.bean.User;
 

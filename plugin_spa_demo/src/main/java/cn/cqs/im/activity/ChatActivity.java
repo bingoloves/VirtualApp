@@ -24,6 +24,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -57,6 +58,7 @@ import cn.cqs.im.R;
 import cn.cqs.im.adapter.ChatAdapter;
 import cn.cqs.im.adapter.OnRecyclerViewListener;
 import cn.cqs.im.base.BaseActivity;
+import cn.cqs.im.utils.SoftKeyBoardListener;
 
 /**
  * 聊天界面
@@ -69,8 +71,8 @@ public class ChatActivity extends BaseActivity implements MessageListHandler {
 
     @BindView(R.id.ll_chat)
     LinearLayout ll_chat;
-    @BindView(R.id.ll_bottom_bar)
-    LinearLayout bottomBar;
+    @BindView(R.id.container)
+    FrameLayout container;
 
     @BindView(R.id.toolbar)
     CustomToolbar customToolbar;
@@ -133,7 +135,7 @@ public class ChatActivity extends BaseActivity implements MessageListHandler {
         BmobIMConversation conversationEntrance = (BmobIMConversation) getIntent().getSerializableExtra("c");
         //TODO 消息：5.1、根据会话入口获取消息管理，聊天页面
         mConversationManager = BmobIMConversation.obtain(BmobIMClient.getInstance(), conversationEntrance);
-        ImmersionBar.with(this).statusBarDarkFont(true).titleBar(customToolbar).init();
+        ImmersionBar.with(this).statusBarDarkFont(true).keyboardEnable(true).titleBar(customToolbar).init();
         customToolbar.setCenterTitle(mConversationManager.getConversationTitle());
         customToolbar.back(v -> finish());
         initSwipeLayout();
@@ -242,24 +244,22 @@ public class ChatActivity extends BaseActivity implements MessageListHandler {
             }
         });
         //监听软键盘弹出，并获取软键盘高度
-//        int oldHeight = bottomBar.getLayoutParams().height;
-//        SoftKeyBoardListener.setListener(this, new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
-//            @Override
-//            public void keyBoardShow(int height) {
-//                //软键盘弹起事件 并给View设置高度
-//                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) bottomBar.getLayoutParams();
-//                layoutParams.height = height+oldHeight;
-//                bottomBar.setLayoutParams(layoutParams);
-//            }
-//
-//            @Override
-//            public void keyBoardHide(int height) {
-//                //软键盘隐藏事件  并给View设置高度为0
-//                LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) bottomBar.getLayoutParams();
-//                layoutParams.height = oldHeight;
-//                bottomBar.setLayoutParams(layoutParams);
-//            }
-//        });
+        SoftKeyBoardListener.setListener(this, new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
+            @Override
+            public void keyBoardShow(int height) {
+                //软键盘弹起事件 并给View设置高度
+                smoothToBottom(0);
+            }
+
+            @Override
+            public void keyBoardHide(int height) {
+            }
+        });
+
+    }
+
+    private void smoothToBottom(int delay){
+        rc_view.postDelayed(() -> rc_view.smoothScrollToPosition(adapter.getCount()),delay);
     }
 
     /**

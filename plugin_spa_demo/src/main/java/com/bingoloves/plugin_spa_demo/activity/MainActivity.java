@@ -45,6 +45,7 @@ import cn.bmob.v3.exception.BmobException;
 import cn.cqs.im.activity.NewFriendActivity;
 import cn.cqs.im.base.BaseActivity;
 import cn.cqs.im.fragment.ConversationFragment;
+import cn.cqs.im.model.UserModel;
 
 /**
  * 仿微信交互方式
@@ -167,11 +168,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         List<MenuItem> result = new ArrayList<>();
         result.add(new MenuItem(R.mipmap.ic_apply_person, "个人中心", v -> { }));
         result.add(new MenuItem(R.mipmap.ic_im, "聊天", v -> { }));
-        result.add(new MenuItem(R.mipmap.ic_add, "新朋友", v -> { mDrawer.closeDrawers();startActivity(new Intent(mActivity, NewFriendActivity.class));}));
+        result.add(new MenuItem(R.mipmap.ic_add, "新朋友", v -> {startActivity(new Intent(mActivity, NewFriendActivity.class));mDrawer.closeDrawers();}));
         result.add(new MenuItem(R.mipmap.ic_music, "音乐", v -> { }));
-        result.add(new MenuItem(R.mipmap.ic_appstore, "组件", v -> { }));
+        result.add(new MenuItem(R.mipmap.ic_appstore, "组件", v -> { startActivity(new Intent(mActivity,CameraActivity.class));mDrawer.closeDrawers();}));
         result.add(new MenuItem(R.mipmap.ic_quit, "退出登录", v -> {
-            UserDao.logOut();
+            UserModel.getInstance().logout();
             App.isLogin = false;
             MMKVHelper.removeKey(Constants.IS_LOGIN);
             startActivity(new Intent(mActivity,LoginActivity.class)); finish();

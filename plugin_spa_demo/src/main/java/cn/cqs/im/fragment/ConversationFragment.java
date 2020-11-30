@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.gyf.immersionbar.ImmersionBar;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,6 +61,7 @@ public class ConversationFragment extends BaseFragment {
     @Override
     protected void initView() {
         ImmersionBar.with(this).titleBar(customToolbar).init();
+        EventBus.getDefault().register(this);
         customToolbar.setCenterTitle("会话");
         customToolbar.showBaseLine();
         customToolbar.setRightTitle("搜索", v -> startActivity(new Intent(getContext(),SearchUserActivity.class)));
@@ -179,5 +182,11 @@ public class ConversationFragment extends BaseFragment {
     public void onEventMainThread(MessageEvent event){
         //重新获取本地消息并刷新列表
         adapter.update(getConversations());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

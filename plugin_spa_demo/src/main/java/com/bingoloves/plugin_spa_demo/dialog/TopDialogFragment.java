@@ -30,34 +30,34 @@ public class TopDialogFragment extends BaseDialogFragment {
         mWindow.setGravity(Gravity.TOP);
         mWindow.setWindowAnimations(R.style.TopAnimation);
         mWindow.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, mWidthAndHeight[1] / 2);
-        DragLayout dragLayout = mRootView.findViewById(R.id.dragLayout);
-        dragLayout.setDragStyle(DragLayout.DragStyle.Top);
-        dragLayout.setOnDragListener(new DragLayout.OnDragListener() {
-            @Override
-            public void onDragStart() {
-                if (mDragTransformer == null) {
-                    mDragTransformer = (content, background, f) ->{
-                        background.setAlpha(1F - f);
-                    };
-                }
-            }
-
-            @Override
-            public void onDragging(float f) {
-                if (mDragTransformer != null) {
-                    LogUtils.e("f = "+f);
-                    mDragTransformer.onDragging(dragLayout,mRootView, f);
-                }
-            }
-
-            @Override
-            public void onDragEnd() {
-                // 动画执行结束后不能直接removeView，要在下一个dispatchDraw周期移除
-                // 否则会崩溃，因为viewGroup的childCount没有来得及-1，获取到的view为空
-                dragLayout.setVisibility(View.INVISIBLE);
-                dragLayout.post(() -> dismiss());
-            }
-        });
+//        DragLayout dragLayout = mRootView.findViewById(R.id.dragLayout);
+//        dragLayout.setDragStyle(DragLayout.DragStyle.Top);
+//        dragLayout.setOnDragListener(new DragLayout.OnDragListener() {
+//            @Override
+//            public void onDragStart() {
+//                if (mDragTransformer == null) {
+//                    mDragTransformer = (content, background, f) ->{
+//                        background.setAlpha(1F - f);
+//                    };
+//                }
+//            }
+//
+//            @Override
+//            public void onDragging(float f) {
+//                if (mDragTransformer != null) {
+//                    LogUtils.e("f = "+f);
+//                    mDragTransformer.onDragging(dragLayout,mRootView, f);
+//                }
+//            }
+//
+//            @Override
+//            public void onDragEnd() {
+//                // 动画执行结束后不能直接removeView，要在下一个dispatchDraw周期移除
+//                // 否则会崩溃，因为viewGroup的childCount没有来得及-1，获取到的view为空
+//                dragLayout.setVisibility(View.INVISIBLE);
+//                dragLayout.post(() -> dismiss());
+//            }
+//        });
     }
     public interface DragTransformer {
         void onDragging(@NonNull View content,

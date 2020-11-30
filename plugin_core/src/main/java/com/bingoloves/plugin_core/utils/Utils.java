@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -460,5 +461,27 @@ public final class Utils {
     }
     public static String getLogDebug(){
         return String.valueOf(BuildConfig.HTTP_LOG);
+    }
+
+    /**
+     * 获取虚拟按键高度
+     *
+     * @param context
+     * @return
+     */
+    public static int getVirtualBarHeigh(Context context) {
+        int vh = 0;
+        WindowManager windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        try {
+            @SuppressWarnings("rawtypes") Class c = Class.forName("android.view.Display");
+            @SuppressWarnings("unchecked") Method method = c.getMethod("getRealMetrics", DisplayMetrics.class);
+            method.invoke(display, dm);
+            vh = dm.heightPixels - windowManager.getDefaultDisplay().getHeight();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return vh;
     }
 }

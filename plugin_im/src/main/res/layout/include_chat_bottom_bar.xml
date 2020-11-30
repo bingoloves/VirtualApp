@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_gravity="bottom"
     android:background="@drawable/base_comment_emo_bar">
 
     <LinearLayout
@@ -94,11 +95,11 @@
             android:gravity="center"/>
     </LinearLayout>
 
-    <View android:layout_width="fill_parent"
+    <View
+        android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="#ffa1a1a1"
         android:focusable="false" />
-
     <LinearLayout
         android:id="@+id/layout_more"
         android:layout_width="match_parent"
@@ -124,5 +125,4 @@
             android:visibility="gone"
             layout="@layout/include_chat_add" />
     </LinearLayout>
-
 </LinearLayout>

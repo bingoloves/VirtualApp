@@ -26,7 +26,7 @@ import cn.cqs.im.db.NewFriend;
 import cn.cqs.im.db.NewFriendManager;
 import cn.cqs.im.event.RefreshEvent;
 import cn.cqs.im.model.UserModel;
-import cn.cqs.im.model.i.UpdateCacheListener;
+import cn.cqs.im.listener.UpdateCacheListener;
 
 /**
  * 消息接收器
