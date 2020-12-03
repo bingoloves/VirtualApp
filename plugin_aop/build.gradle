@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
-
-
+apply plugin: 'android-aspectjx'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
@@ -11,13 +10,7 @@ android {
     }
 
     buildTypes {
-        debug {
-            buildConfigField("boolean","HTTP_LOG","true")
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
         release {
-            buildConfigField("boolean","HTTP_LOG","false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -32,18 +25,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     def deps = rootProject.ext.dependencies
     implementation deps.appcompat
-    implementation deps.recyclerview
-    implementation deps.design
-    implementation deps.luban
-    implementation deps.mmkv
-    implementation deps.glide
-    annotationProcessor deps.glideCompiler
-    api(deps.rxandroid) {
-        exclude module: 'rxjava'
-    }
-    //网络模块
-    api deps["retrofit"]
-    api deps["retrofit-converter-gson"]
-    api deps["retrofit-adapter-rxjava"]
-    api deps["logging-interceptor"]
+    api "org.aspectj:aspectjrt:1.8.9"
 }

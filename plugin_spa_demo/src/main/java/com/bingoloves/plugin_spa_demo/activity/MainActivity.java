@@ -80,6 +80,11 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     private ArrayList<Fragment> mFragments = new ArrayList<>();
 
     @Override
+    public boolean cancelNavigateAnimation() {
+        return true;
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
     }

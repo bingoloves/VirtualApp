@@ -1,1 +1,1 @@
-include ':app', ':plugin_core', ':plugin_login', ':plugin_skin_dark', ':plugin_spa', ':plugin_spa_demo', ':plugin_spa_skin_default', ':plugin_im'
+include ':app', ':plugin_core', ':plugin_login', ':plugin_skin_dark', ':plugin_spa', ':plugin_spa_demo', ':plugin_spa_skin_default', ':plugin_im', ':plugin_aop'

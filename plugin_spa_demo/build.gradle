@@ -69,9 +69,10 @@ dependencies {
     implementation 'cn.bmob.android:bmob-sdk:3.7.4'
     //Bmob IM
     implementation 'cn.bmob.android:bmob-im:2.1.4@aar'
-
+    api 'com.just.agentweb:agentweb:4.1.3'
     implementation project(':plugin_core')
     implementation project(':plugin_im')
+    implementation project(':plugin_aop')
     implementation project(':plugin_spa_skin_default')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

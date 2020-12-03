@@ -2,8 +2,10 @@ package com.bingoloves.plugin_spa_demo.fragment;
 
 import android.view.View;
 
+import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.R;
+import com.bingoloves.plugin_spa_demo.activity.WebActivity;
 import com.bingoloves.plugin_spa_demo.dialog.AlertDialogUtils;
 import com.bingoloves.plugin_spa_demo.dialog.BottomDialogFragment;
 import com.bingoloves.plugin_spa_demo.dialog.LeftDialogFragment;
@@ -12,6 +14,7 @@ import com.bingoloves.plugin_spa_demo.dialog.TopDialogFragment;
 import com.gyf.immersionbar.ImmersionBar;
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.cqs.aop.annotation.SingleClick;
 import cn.cqs.im.base.BaseFragment;
 
 /**
@@ -27,7 +30,8 @@ import cn.cqs.im.base.BaseFragment;
 public class FunctionsFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     CustomToolbar customToolbar;
-    @OnClick({R.id.btn_top,R.id.btn_bottom,R.id.btn_left,R.id.btn_right,R.id.btn_center})
+    @SingleClick
+    @OnClick({R.id.btn_top,R.id.btn_bottom,R.id.btn_left,R.id.btn_right,R.id.btn_center,R.id.btn_web})
     public void clickEvent(View view){
         switch (view.getId()){
             case R.id.btn_top:
@@ -48,6 +52,10 @@ public class FunctionsFragment extends BaseFragment {
                 break;
             case R.id.btn_center:
                 AlertDialogUtils.show(getActivity(),null);
+                break;
+            case R.id.btn_web:
+                //navigateTo(WebActivity.class);
+                LogUtils.e("哈哈");
                 break;
             default:
                 break;
