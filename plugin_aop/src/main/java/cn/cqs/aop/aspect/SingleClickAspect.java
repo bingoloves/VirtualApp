@@ -1,6 +1,7 @@
 package cn.cqs.aop.aspect;
 
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.View;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -20,45 +21,25 @@ import cn.cqs.aop.annotation.SingleClick;
 @Aspect
 public class SingleClickAspect {
     private static long mLastClickTime;
-
-    private static final String POINTCUT_METHOD =
-            "execution(* onClick(..))";
-    private static final String POINTCUT_ANNOTATION =
-            "execution(@cn.leo.click.SingleClick * *(..))";
-    private static final String POINTCUT_BUTTER_KNIFE =
-            "execution(@butterknife.OnClick * *(..))";
-    private static final String POINTCUT_SINGLE_CLICK =
-            "execution(@cn.cqs.aop.annotation.SingleClick * *(..))";
-    @Pointcut(POINTCUT_METHOD)
-    public void methodPointcut() {
-
-    }
-
-    @Pointcut(POINTCUT_ANNOTATION)
-    public void annotationPointcut() {
-
-    }
-
-    @Pointcut(POINTCUT_BUTTER_KNIFE)
-    public void butterKnifePointcut() {
-
-    }
-
+    private static final String POINTCUT_SINGLE_CLICK = "execution(@cn.cqs.aop.annotation.SingleClick * *(..))";
+    private static final String POINTCUT_METHOD = "execution(* onClick(..))";
+    private static final String POINTCUT_BUTTER_KNIFE = "execution(@butterknife.OnClick * *(..))";
     @Pointcut(POINTCUT_SINGLE_CLICK)
-    public void singleClickPointcut(){
+    public void singleClickPointcut(){}
+    @Pointcut(POINTCUT_METHOD)
+    public void methodPointcut(){}
+    @Pointcut(POINTCUT_BUTTER_KNIFE)
+    public void butterKnifePointcut(){}
 
-    }
-
-    @Around("methodPointcut() || annotationPointcut() || butterKnifePointcut() || singleClickPointcut()")
-//    @Around("butterKnifePointcut()")
+    @Around("singleClickPointcut() || methodPointcut() || butterKnifePointcut()")
     public void aroundJoinPoint(final ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             Method method = signature.getMethod();
             //检查方法是否有注解
             boolean hasAnnotation = method != null && method.isAnnotationPresent(SingleClick.class);
-            //计算点击间隔，没有注解默认500，有注解按注解参数来，注解参数为空默认500；
-            int interval = 500;
+            //计算点击间隔，没有自定义注解 默认2000，有注解按注解参数来
+            int interval = 2000;
             if (hasAnnotation) {
                 SingleClick annotation = method.getAnnotation(SingleClick.class);
                 interval = annotation.value();
@@ -104,30 +85,6 @@ public class SingleClickAspect {
                 mLastClickTime = System.currentTimeMillis();
                 joinPoint.proceed();
             }
-
-//            // 取出方法的参数
-//            View view = null;
-//            for (Object arg : joinPoint.getArgs()) {
-//                if (arg instanceof View) {
-//                    view = (View) arg;
-//                    break;
-//                }
-//            }
-//            if (view == null) {
-//                return;
-//            }
-//            // 取出方法的注解
-//            MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-//            Method method = methodSignature.getMethod();
-//            if (!method.isAnnotationPresent(SingleClick.class)) {
-//                return;
-//            }
-//            SingleClick singleClick = method.getAnnotation(SingleClick.class);
-//            // 判断是否快速点击
-//            if (!XClickUtil.isFastDoubleClick(view, singleClick.value())) {
-//                // 不是快速点击，执行原方法
-//                joinPoint.proceed();
-//            }
         } catch (Exception e) {
             //出现异常不拦截点击事件
             joinPoint.proceed();

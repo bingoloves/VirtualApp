@@ -1485,8 +1485,6 @@ public class SlidingUpPanelLayout extends ViewGroup {
                 this.weight = ta.getFloat(0, 0);
                 ta.recycle();
             }
-
-
         }
     }
 }

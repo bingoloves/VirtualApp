@@ -2,4 +2,14 @@
 <resources>
     <color name="color_chat_send_status">#818181</color>
     <color name="color_msg_system_time_bg">#20000000</color>
+
+    <color name="color_E1F5F1">#E1F5F1</color>
+    <color name="color_E7F2FF">#E7F2FF</color>
+    <color name="color_E6F0FE">#E6F0FE</color>
+    <color name="color_FCECE3">#FCECE3</color>
+
+    <color name="color_00A783">#00A783</color>
+    <color name="color_308EFD">#308EFD</color>
+    <color name="color_355FE7">#355FE7</color>
+    <color name="color_FF671D">#FF671D</color>
 </resources>

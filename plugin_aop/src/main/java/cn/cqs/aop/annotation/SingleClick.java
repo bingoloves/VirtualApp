@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SingleClick {
-    int value() default 10000;
+    int value() default 2000;
 
     int[] except() default {};
 

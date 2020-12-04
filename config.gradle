@@ -12,7 +12,7 @@ ext {
             constraint              : "2.0.4",
             retrofitSdkVersion      : "2.4.0",
             dagger2SdkVersion       : "2.6",
-            glide                   : "4.8.0"
+            glide                   : "4.9.0"
     ]
     // 依赖
     dependencies  = [

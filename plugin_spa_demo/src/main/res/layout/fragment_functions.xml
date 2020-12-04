@@ -9,34 +9,29 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@android:color/white"/>
-    <Button
-        android:id="@+id/btn_top"
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.bingoloves.plugin_core.widget.shadow.ShadowLayout
+        android:id="@+id/tvShadowWater"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top"/>
-    <Button
-        android:id="@+id/btn_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bottom"/>
-    <Button
-        android:id="@+id/btn_left"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Left"/>
-    <Button
-        android:id="@+id/btn_right"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Right"/>
-    <Button
-        android:id="@+id/btn_center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Center"/>
-    <Button
-        android:id="@+id/btn_web"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WebView"/>
+        app:hl_cornerRadius="18dp"
+        app:hl_layoutBackground="#fff"
+        app:hl_layoutBackground_true="#ff0000"
+        app:hl_shadowColor="#1400285b"
+        app:hl_shadowLimit="7dp"
+        app:hl_shapeMode="ripple"
+        android:layout_marginBottom="30dp">
+        <TextView
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="水波纹" />
+    </com.bingoloves.plugin_core.widget.shadow.ShadowLayout>
+
+
 </LinearLayout>

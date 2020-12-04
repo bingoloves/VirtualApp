@@ -22,4 +22,8 @@ public class MenuItem {
         this.menuIcon = menuIcon;
         this.clickListener = clickListener;
     }
+    public MenuItem(String name,View.OnClickListener clickListener) {
+        this.name = name;
+        this.clickListener = clickListener;
+    }
 }

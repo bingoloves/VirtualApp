@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'android-aspectjx'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
@@ -69,7 +69,7 @@ dependencies {
     implementation 'cn.bmob.android:bmob-sdk:3.7.4'
     //Bmob IM
     implementation 'cn.bmob.android:bmob-im:2.1.4@aar'
-    api 'com.just.agentweb:agentweb:4.1.3'
+    implementation 'com.just.agentweb:agentweb:4.1.3'
     implementation project(':plugin_core')
     implementation project(':plugin_im')
     implementation project(':plugin_aop')

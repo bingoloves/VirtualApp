@@ -25,5 +25,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     def deps = rootProject.ext.dependencies
     implementation deps.appcompat
-    api "org.aspectj:aspectjrt:1.8.9"
+    api 'org.aspectj:aspectjrt:1.8.13'
 }

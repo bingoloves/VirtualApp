@@ -19,3 +19,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+# 注意被切点注解标识的类与方法一定要keep住，否则会没有效果
+-keep class cn.cqs.aop.aspect.SingleClickAspect {*;}

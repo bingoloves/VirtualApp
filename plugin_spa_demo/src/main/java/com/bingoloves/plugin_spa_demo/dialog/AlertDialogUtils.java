@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bingoloves.plugin_core.utils.Utils;
+import com.bingoloves.plugin_core.widget.particle.ParticleView;
 import com.bingoloves.plugin_spa_demo.R;
 import com.gyf.immersionbar.ImmersionBar;
 
@@ -52,5 +53,34 @@ public class AlertDialogUtils {
                 .keyboardEnable(true)
                 .init();
         return mAlertDialog;
+    }
+
+    /**
+     * 广告演示
+     * @param activity
+     * @param onDismissListener
+     * @return
+     */
+    public static void showAd(Activity activity, DialogInterface.OnDismissListener onDismissListener){
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog mAlertDialog = builder.create();
+        if (onDismissListener != null){
+            mAlertDialog.setOnDismissListener(onDismissListener);
+        }
+        ImmersionBar.with(activity, mAlertDialog).init();
+        View dialogView = LayoutInflater.from(activity).inflate(R.layout.layout_alert_ad, null);
+        mAlertDialog.setCanceledOnTouchOutside(true);
+        mAlertDialog.setCancelable(true);
+        mAlertDialog.setView(dialogView);
+        mAlertDialog.show();
+
+        Window mDialogWindow = mAlertDialog.getWindow();
+        Integer[] widthAndHeight = Utils.getWidthAndHeight(activity.getWindow());
+        mDialogWindow.setLayout(widthAndHeight[0]*2/3,widthAndHeight[1]/4);
+        ParticleView particleView = dialogView.findViewById(R.id.particleView);
+        particleView.startAnim();
+        particleView.setOnParticleAnimListener(() -> {
+            mAlertDialog.dismiss();
+        });
     }
 }
