@@ -22,16 +22,16 @@ import cn.cqs.aop.annotation.SingleClick;
 public class SingleClickAspect {
     private static long mLastClickTime;
     private static final String POINTCUT_SINGLE_CLICK = "execution(@cn.cqs.aop.annotation.SingleClick * *(..))";
-    private static final String POINTCUT_METHOD = "execution(* onClick(..))";
-    private static final String POINTCUT_BUTTER_KNIFE = "execution(@butterknife.OnClick * *(..))";
+//    private static final String POINTCUT_METHOD = "execution(* onClick(..))";
+//    private static final String POINTCUT_BUTTER_KNIFE = "execution(@butterknife.OnClick * *(..))";
     @Pointcut(POINTCUT_SINGLE_CLICK)
     public void singleClickPointcut(){}
-    @Pointcut(POINTCUT_METHOD)
-    public void methodPointcut(){}
-    @Pointcut(POINTCUT_BUTTER_KNIFE)
-    public void butterKnifePointcut(){}
+//    @Pointcut(POINTCUT_METHOD)
+//    public void methodPointcut(){}
+//    @Pointcut(POINTCUT_BUTTER_KNIFE)
+//    public void butterKnifePointcut(){}
 
-    @Around("singleClickPointcut() || methodPointcut() || butterKnifePointcut()")
+    @Around("singleClickPointcut()")
     public void aroundJoinPoint(final ProceedingJoinPoint joinPoint) throws Throwable {
         try {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();

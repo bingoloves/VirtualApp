@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:background="#E1F5F1"
     android:paddingTop="15dp"
-    android:clickable="true"
     android:paddingBottom="15dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
@@ -17,6 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="住户审核"
-        android:textSize="15sp"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:maxWidth="100dp"
+        android:textSize="14sp"
         android:textColor="#00A783"/>
 </com.bingoloves.plugin_core.widget.alpha.XUIAlphaRelativeLayout>

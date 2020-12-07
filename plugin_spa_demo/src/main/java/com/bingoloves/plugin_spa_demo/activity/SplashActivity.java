@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.utils.PermissionsUtils;
@@ -40,6 +42,7 @@ public class SplashActivity extends BaseActivity {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.CAMERA
     };
     @Override
@@ -49,11 +52,12 @@ public class SplashActivity extends BaseActivity {
                 PermissionsUtils.gotoPermissionSetting(mActivity);
             } else {
                 new Handler().postDelayed(() -> {
-                    if (App.isLogin){
-                        startActivity(new Intent(mActivity,MainActivity.class));
+                    LogUtils.e("login = "+App.isLogin());
+                    if (App.isLogin()){
+                        navigateTo(MainActivity.class,true);
                     } else {
-                        startActivity(new Intent(mActivity,LoginActivity.class));
-                    }finish();
+                        navigateTo(LoginActivity.class,true);
+                    }
                 },1500);
             }
         });

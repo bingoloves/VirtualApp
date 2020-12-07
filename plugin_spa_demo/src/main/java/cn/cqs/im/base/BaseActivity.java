@@ -35,7 +35,9 @@ public abstract class BaseActivity extends PluginActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (!cancelNavigateAnimation())overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        if (!cancelNavigateAnimation()){
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        }
         super.onCreate(savedInstanceState);
         mActivity = this;
         setContentView(getLayoutId());
@@ -70,16 +72,23 @@ public abstract class BaseActivity extends PluginActivity{
     protected void initImmersionBar() {
         ImmersionBar.with(this).init();
     }
+
+    private boolean isFinishSelf = false;
+
     /**
      * 页面跳转
      * @param cls
      */
     protected void navigateTo(Class<?> cls){
-        navigateTo(new Intent(),cls);
+        navigateTo(cls,false);
     }
-    protected void navigateTo(Intent intent,Class<?> cls){
-        intent.setClass(mActivity,cls);
+    protected void navigateTo(Class<?> cls,boolean isFinishSelf){
+        navigateTo(new Intent(mActivity,cls),isFinishSelf);
+    }
+    protected void navigateTo(Intent intent,boolean isFinishSelf){
+        this.isFinishSelf = isFinishSelf;
         startActivity(intent);
+        if (isFinishSelf)finish();
     }
     /**
      * toast
@@ -89,11 +98,16 @@ public abstract class BaseActivity extends PluginActivity{
         Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT).show();
     }
 
+
     @Override
     public void finish() {
         super.finish();
         if (!cancelNavigateAnimation()){
-            new Handler().postDelayed(() -> overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right),400);
+//            if (isFinishSelf){
+//                new Handler().postDelayed(() -> overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right),500);
+//            } else {
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+//            }
         }
     }
 

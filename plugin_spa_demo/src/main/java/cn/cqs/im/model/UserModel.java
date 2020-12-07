@@ -99,7 +99,8 @@ public class UserModel extends BaseModel {
             @Override
             public void done(User user, BmobException e) {
                 if (e == null) {
-                    listener.done(getCurrentUser(), null);
+                    listener.done(user, null);
+//                    listener.done(getCurrentUser(), null);
                 } else {
                     listener.done(user, e);
                 }

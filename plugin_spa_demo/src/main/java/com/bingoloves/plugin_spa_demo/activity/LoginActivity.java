@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.cqs.im.base.BaseActivity;
 import cn.cqs.im.model.UserModel;
 
@@ -97,7 +98,6 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         UserModel.getInstance().login(userName, password, new LogInListener<User>() {
-
             @Override
             public void done(User user, BmobException e) {
                 if (e == null){

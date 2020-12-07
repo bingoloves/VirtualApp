@@ -24,5 +24,6 @@ public class ActivityFinishAspect {
     @Around("methodPointcut()")
     public void aroundJoinPoint(final ProceedingJoinPoint joinPoint) throws Throwable {
         Log.e("ActivityFinishAspect"," finish");
+        joinPoint.proceed();
     }
 }

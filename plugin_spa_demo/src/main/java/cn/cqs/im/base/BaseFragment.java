@@ -80,13 +80,15 @@ public abstract class BaseFragment extends PluginFragment{
      * @param cls
      */
     protected void navigateTo(Class<?> cls){
-        startActivity(new Intent(getContext(),cls));
+        navigateTo(cls,false);
     }
-    protected void navigateTo(Intent intent,Class<?> cls){
-        intent.setClass(getContext(),cls);
+    protected void navigateTo(Class<?> cls,boolean isFinishSelf){
+        navigateTo(new Intent(getContext(),cls),isFinishSelf);
+    }
+    protected void navigateTo(Intent intent,boolean isFinishSelf){
         startActivity(intent);
+        if (isFinishSelf && getActivity() != null)getActivity().finish();
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();

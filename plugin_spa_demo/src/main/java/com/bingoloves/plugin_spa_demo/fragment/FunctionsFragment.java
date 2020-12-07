@@ -14,6 +14,7 @@ import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_core.widget.particle.ParticleView;
 import com.bingoloves.plugin_spa_demo.R;
+import com.bingoloves.plugin_spa_demo.activity.StickyBarActivity;
 import com.bingoloves.plugin_spa_demo.activity.WebActivity;
 import com.bingoloves.plugin_spa_demo.bean.MenuItem;
 import com.bingoloves.plugin_spa_demo.dialog.AlertDialogUtils;
@@ -24,6 +25,8 @@ import com.bingoloves.plugin_spa_demo.dialog.TopDialogFragment;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -103,11 +106,16 @@ public class FunctionsFragment extends BaseFragment {
         }));
         list.add(new MenuItem("Center",v -> AlertDialogUtils.show(getActivity(),null)));
         list.add(new MenuItem("WebView",v -> navigateTo(WebActivity.class)));
-        list.add(new MenuItem("防重复点击",v -> {
-            num++;
-            toast("有效点击数："+ num);
+        list.add(new MenuItem("防重复点击", new View.OnClickListener() {
+            @SingleClick
+            @Override
+            public void onClick(View v) {
+                num++;
+                toast("有效点击数："+ num);
+            }
         }));
         list.add(new MenuItem("广告",v -> AlertDialogUtils.showAd(getActivity(),null)));
+        list.add(new MenuItem("二次吸顶",v ->navigateTo(StickyBarActivity.class)));
     }
 
     @Override

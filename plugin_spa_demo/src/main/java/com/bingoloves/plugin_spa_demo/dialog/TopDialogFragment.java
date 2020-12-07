@@ -14,7 +14,6 @@ import com.bingoloves.plugin_spa_demo.R;
 import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
-import com.bingoloves.plugin_spa_demo.fragment.BaseDialogFragment;
 
 /**
  * 顶部DialogFragment

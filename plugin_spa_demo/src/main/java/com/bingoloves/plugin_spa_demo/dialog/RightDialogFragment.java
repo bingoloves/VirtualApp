@@ -5,7 +5,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.fragment.BaseDialogFragment;
 import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;

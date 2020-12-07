@@ -1,6 +1,9 @@
 package com.bingoloves.plugin_spa_demo;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+
 import com.bingoloves.plugin_core.http.MMKVHelper;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
@@ -27,21 +30,25 @@ import cn.cqs.im.DemoMessageHandler;
 
 public class App extends Application{
 
-    public static boolean isLogin = false;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        iniCache();
+        MMKVHelper.init(this);
         initBmob();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     /**
      * 初始化缓存数据
      */
-    private void iniCache() {
-        MMKVHelper.init(this);
-        isLogin = MMKVHelper.decodeBoolean(Constants.IS_LOGIN);
+    public static boolean isLogin() {
+        boolean isLogin = MMKVHelper.decodeBoolean(Constants.IS_LOGIN);
+        return isLogin;
     }
 
     public void initBmob(){

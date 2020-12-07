@@ -54,6 +54,7 @@
         <activity android:name=".activity.DetailActivity"/>
         <activity android:name=".activity.CameraActivity"/>
         <activity android:name=".activity.WebActivity"/>
+        <activity android:name=".activity.StickyBarActivity"/>
 
         <!--IM 页面-->
         <activity android:name="cn.cqs.im.activity.NewFriendActivity"/>

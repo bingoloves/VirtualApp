@@ -2,6 +2,7 @@ package com.bingoloves.plugin_spa_demo.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -108,6 +109,7 @@ public class WebActivity extends BaseActivity{
         mAgentWeb.getWebLifeCycle().onDestroy();
         super.onDestroy();
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -1,8 +1,10 @@
 package com.bingoloves.plugin_core.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -13,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bingoloves.plugin_core.R;
+import com.bingoloves.plugin_core.utils.DensityUtils;
 
 /**
  * Created by bingo on 2020/11/11.
@@ -31,9 +34,12 @@ public class CustomToolbar extends RelativeLayout {
     private TextView centerTitleTv;
     private TextView rightTitleTv;
     private View baseLineView;
-    private RelativeLayout bgRl;
     private Context context;
 
+    private Drawable mLeftIcon;
+    private String mTitleText,mLeftText;
+    private int mTitleTextColor,mDividerColor;
+    private int mTitleTextSize;
     public CustomToolbar(Context context) {
         this(context, null);
     }
@@ -44,13 +50,12 @@ public class CustomToolbar extends RelativeLayout {
 
     public CustomToolbar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context);
+        initView(context,attrs,defStyleAttr);
     }
 
-    private void initView(Context context) {
+    private void initView(Context context, AttributeSet attrs, int defStyleAttr) {
         this.context = context;
         View view = LayoutInflater.from(context).inflate(R.layout.layout_base_custome_toolbar, this);
-        bgRl = (RelativeLayout) view.findViewById(R.id.custom_toolbar_bg_rl);
         leftImg = (ImageView) view.findViewById(R.id.custom_toolbar_left_img);
         rightImg = (ImageView) view.findViewById(R.id.custom_toolbar_right_img);
         leftTitleTv = (TextView) view.findViewById(R.id.custom_toolbar_left_title_tv);
@@ -58,6 +63,18 @@ public class CustomToolbar extends RelativeLayout {
         centerTitleTv = (TextView) view.findViewById(R.id.custom_toolbar_center_title_tv);
         rightTitleTv = (TextView) view.findViewById(R.id.custom_toolbar_right_title_tv);
         baseLineView = (View) view.findViewById(R.id.custom_toolbar_baseline_view);
+        if (attrs != null){
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomToolbar, defStyleAttr, 0);
+            if (typedArray != null) {
+                mLeftIcon = typedArray.getDrawable(R.styleable.CustomToolbar_leftIcon);
+                mLeftText = typedArray.getString(R.styleable.CustomToolbar_leftText);
+                mTitleText = typedArray.getString(R.styleable.CustomToolbar_title);
+                mTitleTextColor = typedArray.getColor(R.styleable.CustomToolbar_titleTextColor, Color.BLACK);
+                mDividerColor = typedArray.getColor(R.styleable.CustomToolbar_dividerColor, Color.parseColor("#F0F0F0"));
+                mTitleTextSize = typedArray.getDimensionPixelSize(R.styleable.CustomToolbar_titleTextSize, 16);
+                typedArray.recycle();
+            }
+        }
         init();
     }
 
@@ -69,6 +86,16 @@ public class CustomToolbar extends RelativeLayout {
         centerTitleTv.setVisibility(GONE);
         rightTitleTv.setVisibility(GONE);
         baseLineView.setVisibility(GONE);
+        if (mLeftIcon != null){
+            leftImg.setVisibility(VISIBLE);
+            leftImg.setImageDrawable(mLeftIcon);
+        }
+        if (!TextUtils.isEmpty(mLeftText)){
+            setLeftSubTitle(mLeftText);
+        }
+        if (!TextUtils.isEmpty(mTitleText)){
+            setCenterTitle(mTitleText,mTitleTextColor,mTitleTextSize,null);
+        }
     }
 
     public void back(OnClickListener listener) {
@@ -76,12 +103,6 @@ public class CustomToolbar extends RelativeLayout {
         leftImg.setOnClickListener(listener);
     }
 
-//    public void setBackground(int color) {
-//        if (bgRl != null) {
-//            bgRl.setBackgroundColor(ActivityCompat.getColor(context,color));
-//        }
-//        setBackground();
-//    }
     /**
      * 设置左边按钮背景
      *
@@ -254,7 +275,6 @@ public class CustomToolbar extends RelativeLayout {
                     leftSubTitleTv.setTextColor(Color.parseColor(colorRes));
                 }
             }
-
         }
     }
 
@@ -291,11 +311,31 @@ public class CustomToolbar extends RelativeLayout {
      * @param title
      * @param clickListener
      */
+    public void setCenterTitle(String title, int color,int textSize, OnClickListener clickListener) {
+        if (!TextUtils.isEmpty(title)) {
+            if (centerTitleTv != null) {
+                centerTitleTv.setVisibility(VISIBLE);
+                centerTitleTv.setText(title);
+                centerTitleTv.setTextSize(textSize);
+                centerTitleTv.setTextColor(color);
+                if (clickListener != null) {
+                    centerTitleTv.setOnClickListener(clickListener);
+                }
+            }
+        }
+    }
+    /**
+     * 设置中间文字并设置点击事件
+     *
+     * @param title
+     * @param clickListener
+     */
     public void setCenterTitle(String title, String colorRes, OnClickListener clickListener) {
         if (!TextUtils.isEmpty(title)) {
             if (centerTitleTv != null) {
                 centerTitleTv.setVisibility(VISIBLE);
                 centerTitleTv.setText(title);
+                centerTitleTv.setTextSize(mTitleTextSize);
                 if (clickListener != null) {
                     centerTitleTv.setOnClickListener(clickListener);
                 }
@@ -303,10 +343,8 @@ public class CustomToolbar extends RelativeLayout {
                     centerTitleTv.setTextColor(Color.parseColor(colorRes));
                 }
             }
-
         }
     }
-
     /**
      * 设置颜色
      * @param color

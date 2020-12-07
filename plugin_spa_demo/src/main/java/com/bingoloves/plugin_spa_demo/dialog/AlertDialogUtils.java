@@ -76,7 +76,7 @@ public class AlertDialogUtils {
 
         Window mDialogWindow = mAlertDialog.getWindow();
         Integer[] widthAndHeight = Utils.getWidthAndHeight(activity.getWindow());
-        mDialogWindow.setLayout(widthAndHeight[0]*2/3,widthAndHeight[1]/4);
+        mDialogWindow.setLayout(widthAndHeight[0]*4/5,widthAndHeight[1]/2);
         ParticleView particleView = dialogView.findViewById(R.id.particleView);
         particleView.startAnim();
         particleView.setOnParticleAnimListener(() -> {

@@ -1,4 +1,4 @@
-package com.bingoloves.plugin_spa_demo.fragment;
+package com.bingoloves.plugin_spa_demo.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;

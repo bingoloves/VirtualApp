@@ -10,6 +10,7 @@ ext {
             supportSdkVersion       : "28.0.0",
             butterknife             : "8.8.1",
             constraint              : "2.0.4",
+            multidex                : "1.0.3",
             retrofitSdkVersion      : "2.4.0",
             dagger2SdkVersion       : "2.6",
             glide                   : "4.9.0"
@@ -24,6 +25,7 @@ ext {
            cardview                 : "com.android.support:cardview-v7:${version.supportSdkVersion}",
            annotations              : "com.android.support:support-annotations:${version.supportSdkVersion}",
            constraint               : "com.android.support.constraint:constraint-layout:${version.constraint}",
+           multidex                 : "com.android.support:multidex:${version.multidex}",
            //三方组件支持
            glide                    : "com.github.bumptech.glide:glide:${version.glide}",          //glide图片加载
            glideCompiler            : "com.github.bumptech.glide:compiler:${version.glide}",

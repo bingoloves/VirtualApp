@@ -178,7 +178,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         result.add(new MenuItem(R.mipmap.ic_appstore, "组件", v -> { startActivity(new Intent(mActivity,CameraActivity.class));mDrawer.closeDrawers();}));
         result.add(new MenuItem(R.mipmap.ic_quit, "退出登录", v -> {
             UserModel.getInstance().logout();
-            App.isLogin = false;
             MMKVHelper.removeKey(Constants.IS_LOGIN);
             startActivity(new Intent(mActivity,LoginActivity.class)); finish();
         }));

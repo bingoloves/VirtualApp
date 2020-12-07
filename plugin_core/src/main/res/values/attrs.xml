@@ -276,4 +276,13 @@
         <attr name="pv_spread_anim_time" format="integer"></attr>
         <attr name="pv_host_text_anim_time" format="integer"></attr>
     </declare-styleable>
+    <!--自定义ToolBar-->
+    <declare-styleable name="CustomToolbar">
+        <attr name="leftIcon" format="reference" />
+        <attr name="leftText" format="string" />
+        <attr name="title" format="string" />
+        <attr name="titleTextSize" format="dimension" />
+        <attr name="titleTextColor" format="color" />
+        <attr name="dividerColor" format="color" />
+    </declare-styleable>
 </resources>
