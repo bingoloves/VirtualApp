@@ -8,19 +8,54 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:background="@android:color/white"/>
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.bingoloves.plugin_spa_demo.camera.AutoTextureView
+        <!--预览的图片-->
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone" />
+        <com.bingoloves.plugin_spa_demo.camera.AutoFitTextureView
             android:id="@+id/textureView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        <ImageView
-            android:id="@+id/iv_change_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@mipmap/ic_classify"/>
-    </FrameLayout>
+        <!--底部操作-->
+        <RelativeLayout
+            android:id="@+id/rl_opt"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="90dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageButton
+                android:id="@+id/btn_takePhoto"
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_camera" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="点击拍照"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+            <ImageView
+                android:id="@+id/iv_change_camera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@mipmap/ic_switch_camera"/>
+        </RelativeLayout>
+    </RelativeLayout>
 
 </LinearLayout>

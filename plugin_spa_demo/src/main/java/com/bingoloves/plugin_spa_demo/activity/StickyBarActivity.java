@@ -1,23 +1,18 @@
 package com.bingoloves.plugin_spa_demo.activity;
 
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.view.View;
 
+import com.bingoloves.plugin_core.navigate.BaseEffects;
+import com.bingoloves.plugin_core.navigate.SwitchLayout;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_core.widget.CustomViewPager;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.fragment.FunctionsFragment;
-import com.bingoloves.plugin_spa_demo.fragment.HomeFragment;
-import com.bingoloves.plugin_spa_demo.fragment.MineFragment;
 import com.bingoloves.plugin_spa_demo.fragment.TabFragment;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import cn.cqs.im.base.BaseActivity;

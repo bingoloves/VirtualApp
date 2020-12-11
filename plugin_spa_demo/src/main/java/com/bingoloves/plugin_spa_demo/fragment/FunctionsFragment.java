@@ -1,38 +1,40 @@
 package com.bingoloves.plugin_spa_demo.fragment;
 
-import android.support.annotation.NonNull;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
 import android.view.View;
 
 import com.bingoloves.plugin_core.adapter.recyclerview.CommonAdapter;
 import com.bingoloves.plugin_core.adapter.recyclerview.base.ViewHolder;
 import com.bingoloves.plugin_core.adapter.recyclerview.utils.GridSpacingItemDecoration;
+import com.bingoloves.plugin_core.utils.AnyLayerHelper;
 import com.bingoloves.plugin_core.utils.DensityUtils;
-import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
-import com.bingoloves.plugin_core.widget.particle.ParticleView;
+import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.R;
+import com.bingoloves.plugin_spa_demo.activity.Camera2Activity;
+import com.bingoloves.plugin_spa_demo.activity.CameraActivity;
+import com.bingoloves.plugin_spa_demo.activity.DragLayout2Activity;
 import com.bingoloves.plugin_spa_demo.activity.StickyBarActivity;
+import com.bingoloves.plugin_spa_demo.activity.VideoListActivity;
 import com.bingoloves.plugin_spa_demo.activity.WebActivity;
 import com.bingoloves.plugin_spa_demo.bean.MenuItem;
 import com.bingoloves.plugin_spa_demo.dialog.AlertDialogUtils;
 import com.bingoloves.plugin_spa_demo.dialog.BottomDialogFragment;
+import com.bingoloves.plugin_spa_demo.dialog.CustomBottomSheetDialogFragment;
 import com.bingoloves.plugin_spa_demo.dialog.LeftDialogFragment;
 import com.bingoloves.plugin_spa_demo.dialog.RightDialogFragment;
 import com.bingoloves.plugin_spa_demo.dialog.TopDialogFragment;
 import com.gyf.immersionbar.ImmersionBar;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import cn.cqs.aop.annotation.SingleClick;
 import cn.cqs.im.base.BaseFragment;
 
@@ -89,16 +91,18 @@ public class FunctionsFragment extends BaseFragment {
         manageTextColorMap.put(3,R.color.color_FF671D);
 
         list.add(new MenuItem("Top", v -> {
-            TopDialogFragment topDialogFragment = new TopDialogFragment();
-            topDialogFragment.show(getChildFragmentManager(), TopDialogFragment.class.getSimpleName());
+//            TopDialogFragment topDialogFragment = new TopDialogFragment();
+//            topDialogFragment.show(getChildFragmentManager(), TopDialogFragment.class.getSimpleName());
+            AnyLayerHelper.showTopDrawer(getContext(),R.layout.dialog_drag);
         }));
         list.add(new MenuItem("Bottom",v -> {
             BottomDialogFragment bottomDialogFragment = new BottomDialogFragment();
             bottomDialogFragment.show(getChildFragmentManager(), BottomDialogFragment.class.getSimpleName());
         }));
         list.add(new MenuItem("Left",v -> {
-            LeftDialogFragment leftDialogFragment = new LeftDialogFragment();
-            leftDialogFragment.show(getChildFragmentManager(), LeftDialogFragment.class.getSimpleName());
+//            LeftDialogFragment leftDialogFragment = new LeftDialogFragment();
+//            leftDialogFragment.show(getChildFragmentManager(), LeftDialogFragment.class.getSimpleName());
+            AnyLayerHelper.showLeftDrawer(getContext(),R.layout.dialog);
         }));
         list.add(new MenuItem("Right",v -> {
             RightDialogFragment rightDialogFragment = new RightDialogFragment();
@@ -106,6 +110,9 @@ public class FunctionsFragment extends BaseFragment {
         }));
         list.add(new MenuItem("Center",v -> AlertDialogUtils.show(getActivity(),null)));
         list.add(new MenuItem("WebView",v -> navigateTo(WebActivity.class)));
+        list.add(new MenuItem("博客",v -> WebActivity.openWeb(getContext(),"http://bingoloss.gitee.io/blog")));
+        list.add(new MenuItem("相机",v -> navigateTo(CameraActivity.class)));
+        list.add(new MenuItem("相机2",v -> navigateTo(Camera2Activity.class)));
         list.add(new MenuItem("防重复点击", new View.OnClickListener() {
             @SingleClick
             @Override
@@ -116,8 +123,18 @@ public class FunctionsFragment extends BaseFragment {
         }));
         list.add(new MenuItem("广告",v -> AlertDialogUtils.showAd(getActivity(),null)));
         list.add(new MenuItem("二次吸顶",v ->navigateTo(StickyBarActivity.class)));
+        list.add(new MenuItem("视频列表",v ->navigateTo(VideoListActivity.class)));
+        list.add(new MenuItem("DragLayout2",v ->navigateTo(DragLayout2Activity.class)));
+        list.add(new MenuItem("BottomSheet",v ->{
+            if ( null == bottomSheetDialogFragment) bottomSheetDialogFragment = new CustomBottomSheetDialogFragment();
+            bottomSheetDialogFragment.show(getChildFragmentManager(), "dialog");
+        }));
+        list.add(new MenuItem("崩溃测试",v -> {
+            CrashReport.putUserData(getContext(),"xuebing","今天的天气真好");
+            CrashReport.testJavaCrash();
+        }));
     }
-
+    private CustomBottomSheetDialogFragment bottomSheetDialogFragment;
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_functions;

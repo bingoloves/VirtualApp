@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.widget.Toast;
 import com.bingoloves.plugin_core.base.PluginActivity;
+import com.bingoloves.plugin_core.navigate.BaseEffects;
+import com.bingoloves.plugin_core.navigate.SwichLayoutInterFace;
+import com.bingoloves.plugin_core.navigate.SwitchLayout;
 import com.bingoloves.plugin_core.utils.Injector;
 import com.gyf.immersionbar.ImmersionBar;
 import butterknife.ButterKnife;
@@ -35,10 +39,8 @@ public abstract class BaseActivity extends PluginActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        if (!cancelNavigateAnimation()){
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        }
         super.onCreate(savedInstanceState);
+        if (!cancelNavigateAnimation())overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         mActivity = this;
         setContentView(getLayoutId());
         //绑定控件
@@ -74,7 +76,6 @@ public abstract class BaseActivity extends PluginActivity{
     }
 
     private boolean isFinishSelf = false;
-
     /**
      * 页面跳转
      * @param cls
@@ -86,8 +87,8 @@ public abstract class BaseActivity extends PluginActivity{
         navigateTo(new Intent(mActivity,cls),isFinishSelf);
     }
     protected void navigateTo(Intent intent,boolean isFinishSelf){
-        this.isFinishSelf = isFinishSelf;
         startActivity(intent);
+        this.isFinishSelf = isFinishSelf;
         if (isFinishSelf)finish();
     }
     /**
@@ -103,11 +104,11 @@ public abstract class BaseActivity extends PluginActivity{
     public void finish() {
         super.finish();
         if (!cancelNavigateAnimation()){
-//            if (isFinishSelf){
-//                new Handler().postDelayed(() -> overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right),500);
-//            } else {
+            if (isFinishSelf){
+                new Handler().postDelayed(() -> overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right),300);
+            } else {
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-//            }
+            }
         }
     }
 

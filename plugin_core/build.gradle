@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-
-
+//apply plugin: 'com.github.dcendents:android-maven'
+group = 'https://github.com/bingoloves'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
@@ -32,10 +32,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     def deps = rootProject.ext.dependencies
     implementation deps.appcompat
+    implementation deps.palette
     implementation deps.recyclerview
     implementation deps.design
     implementation deps.luban
     implementation deps.mmkv
+    implementation deps.autosize
+    api deps.anylayer
     implementation deps.glide
     annotationProcessor deps.glideCompiler
     api(deps.rxandroid) {

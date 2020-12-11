@@ -15,8 +15,17 @@ import android.view.View;
 public class MenuItem {
     public String name;
     public int menuIcon;
+    public String msg;
+    public boolean hasLine;
     public View.OnClickListener clickListener;
 
+    public MenuItem(int icon, String name, String msg, boolean hasLine, View.OnClickListener clickListener) {
+        this.menuIcon = icon;
+        this.name = name;
+        this.msg = msg;
+        this.hasLine = hasLine;
+        this.clickListener = clickListener;
+    }
     public MenuItem(int menuIcon,String name,View.OnClickListener clickListener) {
         this.name = name;
         this.menuIcon = menuIcon;

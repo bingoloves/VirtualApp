@@ -19,7 +19,6 @@ import com.bingoloves.plugin_core.adapter.recyclerview.base.ViewHolder;
 import com.bingoloves.plugin_core.http.MMKVHelper;
 import com.bingoloves.plugin_core.utils.Utils;
 import com.bingoloves.plugin_core.widget.CustomViewPager;
-import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.Constants;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.adapter.BaseViewPagerAdapter;
@@ -34,7 +33,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.gyf.immersionbar.ImmersionBar;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
@@ -71,7 +69,6 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
     RecyclerView drawerRecyclerView;
     @BindView(R.id.tv_version)
     TextView versionTv;
-
 
     private String[] mTitles = {"首页", "功能", "我的"};
     private int[] mIconUnselectIds = {R.mipmap.ic_tabbar_home, R.mipmap.ic_tabbar_functions, R.mipmap.ic_tabbar_mine};
@@ -129,7 +126,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             @Override
             public void onPageSelected(int position) {
                 bottomTab.setCurrentTab(position);
-                ImmersionBar.with(mActivity).statusBarDarkFont(position != 2).init();
+                //ImmersionBar.with(mActivity).statusBarDarkFont(position != 2).init();
             }
 
             @Override
@@ -175,7 +172,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         result.add(new MenuItem(R.mipmap.ic_im, "聊天", v -> { }));
         result.add(new MenuItem(R.mipmap.ic_add, "新朋友", v -> {startActivity(new Intent(mActivity, NewFriendActivity.class));mDrawer.closeDrawers();}));
         result.add(new MenuItem(R.mipmap.ic_music, "音乐", v -> { }));
-        result.add(new MenuItem(R.mipmap.ic_appstore, "组件", v -> { startActivity(new Intent(mActivity,CameraActivity.class));mDrawer.closeDrawers();}));
+        result.add(new MenuItem(R.mipmap.ic_appstore, "组件", v -> { }));
         result.add(new MenuItem(R.mipmap.ic_quit, "退出登录", v -> {
             UserModel.getInstance().logout();
             MMKVHelper.removeKey(Constants.IS_LOGIN);
@@ -222,5 +219,4 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
             });
         }
     }
-
 }

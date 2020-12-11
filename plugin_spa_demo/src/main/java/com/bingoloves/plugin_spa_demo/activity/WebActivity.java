@@ -1,5 +1,7 @@
 package com.bingoloves.plugin_spa_demo.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.util.Log;
@@ -37,8 +39,12 @@ public class WebActivity extends BaseActivity{
     @BindView(R.id.container)
     LinearLayout container;
     private AgentWeb mAgentWeb;
-    private String webUrl = "http://www.baidu.com";
+    private static String webUrl = "http://www.baidu.com";
 
+    public static void openWeb(Context context,String url){
+        webUrl = url;
+        context.startActivity(new Intent(context,WebActivity.class));
+    }
     @Override
     protected int getLayoutId() {
         return R.layout.activity_web;

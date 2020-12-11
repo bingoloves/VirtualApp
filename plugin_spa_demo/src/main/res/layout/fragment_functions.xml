@@ -13,7 +13,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
 
     <com.bingoloves.plugin_core.widget.shadow.ShadowLayout
         android:id="@+id/tvShadowWater"
@@ -32,6 +33,4 @@
             android:gravity="center"
             android:text="水波纹" />
     </com.bingoloves.plugin_core.widget.shadow.ShadowLayout>
-
-
 </LinearLayout>

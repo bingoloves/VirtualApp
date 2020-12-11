@@ -29,7 +29,6 @@ public abstract class BaseFragment extends PluginFragment{
     private Unbinder unbinder;
     protected String mTag = this.getClass().getSimpleName();
     protected View mContentView;
-
     protected abstract int getLayoutId();
     protected abstract void initView();
     @Override
@@ -87,7 +86,9 @@ public abstract class BaseFragment extends PluginFragment{
     }
     protected void navigateTo(Intent intent,boolean isFinishSelf){
         startActivity(intent);
-        if (isFinishSelf && getActivity() != null)getActivity().finish();
+        if (getActivity() != null){
+            if (isFinishSelf)getActivity().finish();
+        }
     }
     @Override
     public void onDestroy() {

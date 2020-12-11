@@ -2,8 +2,11 @@ package com.bingoloves.plugin_core.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Application;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -17,6 +20,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -39,6 +43,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public final class Utils {
 
@@ -379,6 +384,11 @@ public final class Utils {
         return formatJson(json, 4);
     }
 
+    /**
+     * @param json
+     * @param indentSpaces  缩进空间
+     * @return
+     */
     public static String formatJson(final String json, final int indentSpaces) {
         try {
             for (int i = 0, len = json.length(); i < len; i++) {
@@ -439,6 +449,28 @@ public final class Utils {
             }
         }
     }
+
+    /**
+     * 获取Manifast中配置的 META_DATA 数据
+     * @param context
+     * @param name
+     * @param <T>
+     * @return
+     */
+    public static <T> T getMetaData(Context context, String name) {
+        try {
+            final ApplicationInfo ai = context.getPackageManager().getApplicationInfo(context.getPackageName(),
+                    PackageManager.GET_META_DATA);
+
+            if (ai.metaData != null) {
+                return (T) ai.metaData.get(name);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     //常用操作
     public static void snack(View view,String msg){
         Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show();
@@ -483,5 +515,28 @@ public final class Utils {
             e.printStackTrace();
         }
         return vh;
+    }
+
+    public static boolean isTopActivity(Activity activity){
+        return activity!=null && isTopActivity(activity, activity.getClass().getName());
+    }
+
+    public static boolean isTopActivity(Context context, String activityName){
+        return isForeground(context, activityName);
+    }
+
+    public static boolean isForeground(Context context, String className) {
+        if (context == null || TextUtils.isEmpty(className)) {
+            return false;
+        }
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
+        if (list != null && list.size() > 0) {
+            ComponentName cpn = list.get(0).topActivity;
+            if (className.equals(cpn.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }

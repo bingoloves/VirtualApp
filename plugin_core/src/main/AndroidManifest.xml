@@ -1,16 +1,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bingoloves.plugin_core">
-    <application android:networkSecurityConfig="@xml/network_security_config">
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:resizeableActivity="true"
+        android:maxAspectRatio="2.4">
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="375"/>
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640"/>
+        <!--全面屏适配-->
+        <!-- 升级targetSdkVersion为25以上版本-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
+        <!--刘海屏-->
+        <!--适配华为（huawei）刘海屏-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true"/>
+        <!--适配小米（xiaomi）刘海屏-->
+        <meta-data
+            android:name="notch.config"
+            android:value="portrait|landscape" />
+        <!--代理类-->
         <activity android:name=".proxy.ProxyActivity" />
-
         <service android:name=".proxy.ProxyService" />
         <activity
             android:name=".utils.crash.DefaultErrorActivity"
             android:process=":error_activity" />
+        <!--崩溃配置-->
         <provider
             android:name=".utils.crash.CaocInitProvider"
             android:authorities="${applicationId}.crashinitprovider"
             android:exported="false"
             android:initOrder="101" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 </manifest>

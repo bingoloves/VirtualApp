@@ -285,4 +285,8 @@
         <attr name="titleTextColor" format="color" />
         <attr name="dividerColor" format="color" />
     </declare-styleable>
+    <declare-styleable name="HrLayout">
+        <attr name="defaultHeight" format="dimension"></attr>
+        <attr name="realHeight" format="dimension"></attr>
+    </declare-styleable>
 </resources>

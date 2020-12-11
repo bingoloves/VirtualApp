@@ -6,11 +6,9 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_spa_demo.App;
 import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.utils.PermissionsUtils;
-import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,6 +24,11 @@ public class SplashActivity extends BaseActivity {
     public void clickEvent(){
         startActivity(new Intent(mActivity,LoginActivity.class));
         finish();
+    }
+
+    @Override
+    public boolean cancelNavigateAnimation() {
+        return true;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class SplashActivity extends BaseActivity {
                 PermissionsUtils.gotoPermissionSetting(mActivity);
             } else {
                 new Handler().postDelayed(() -> {
-                    LogUtils.e("login = "+App.isLogin());
+//                    LogUtils.e("login = "+App.isLogin());
                     if (App.isLogin()){
                         navigateTo(MainActivity.class,true);
                     } else {

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.bingoloves.plugin_core.widget.layout.XUILinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="#232323"
+    app:xui_radius="4dp"
+    android:orientation="vertical">
+    <!--动态菜单数据 最好有限个，不推荐过多数据集-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_popup_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none"/>
+</com.bingoloves.plugin_core.widget.layout.XUILinearLayout>

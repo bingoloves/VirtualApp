@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:layout_marginLeft="10dip"
+    android:layout_marginRight="10dip"
+    android:background="@android:color/transparent">
+
+    <com.bingoloves.plugin_core.widget.layout.XUILinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        app:xui_radius="4dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="6dp"
+                android:paddingTop="15dp"
+                android:textColor="#333333"
+                android:textSize="17sp"
+                android:visibility="visible"
+                tools:text="订单提交成功" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:gravity="center"
+                android:lineSpacingExtra="6dp"
+                android:textColor="#666666"
+                android:textSize="15sp"
+                tools:text="我们将在30分钟处理，稍后通知您订单结果！感谢您选择" />
+        </LinearLayout>
+        <!--只有一个标题的-->
+        <TextView
+            android:id="@+id/tv_only_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="6dp"
+            android:minHeight="106dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="#292d33"
+            android:textSize="17sp"
+            android:visibility="gone"
+            tools:text="订单提交成功" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f6f6f6"/>
+        <!--下面的button-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:minHeight="44dp"
+                android:text="取消"
+                android:textColor="#757575"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#f6f6f6"/>
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center"
+                android:minHeight="44dp"
+                android:text="确定"
+                android:textColor="#f7595a"
+                android:textSize="16sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </LinearLayout>
+    </com.bingoloves.plugin_core.widget.layout.XUILinearLayout>
+
+</RelativeLayout>

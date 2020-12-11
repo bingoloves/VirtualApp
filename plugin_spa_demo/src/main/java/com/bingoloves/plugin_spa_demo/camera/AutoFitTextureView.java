@@ -2,6 +2,7 @@ package com.bingoloves.plugin_spa_demo.camera;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.graphics.SurfaceTexture;
 import android.util.AttributeSet;
 import android.view.TextureView;
 
@@ -15,7 +16,7 @@ import android.view.TextureView;
  * @QQ:745612618
  */
 
-public class AutoFitTextureView extends TextureView {
+public class AutoFitTextureView extends TextureView{
 
     private int mRatioWidth = 0;
     private int mRatioHeight = 0;
@@ -65,8 +66,7 @@ public class AutoFitTextureView extends TextureView {
      * @param width
      * @param height
      */
-    public void setVideoAspectRatio(int width, int height)
-    {
+    public void setVideoAspectRatio(int width, int height) {
         if (width < 0 || height < 0) {
             throw new IllegalArgumentException("Size cannot be negative.");
         }
@@ -74,8 +74,7 @@ public class AutoFitTextureView extends TextureView {
         mRatioHeight = height;
 
         float mRatio = (float) mRatioWidth / (float) mRatioHeight;   //算出相机的缩放比例
-        if(mRatio < 1.0)
-        {
+        if(mRatio < 1.0) {
             setAspectRatio(width, height);
         }else {
             float h = getWidth() / mRatio;
@@ -90,5 +89,4 @@ public class AutoFitTextureView extends TextureView {
             setTransform(matrix);
         }
     }
-
 }

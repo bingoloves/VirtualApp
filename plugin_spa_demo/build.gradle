@@ -10,7 +10,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField("String","BMOB_APP_ID","\"3ef3bbfa8d13e8269ae6ede1fede675b\"")
+        buildConfigField("String","BUGLY_ID","\"8d379eea6e\"")
         multiDexEnabled = true
+        //ijkplayer/bugly
+        ndk {
+            abiFilters 'armeabi-v7a', 'x86'//, 'armeabi-v7a', 'arm64-v8a', 'x86_64', 'mips', 'mips64'
+        }
     }
     signingConfigs {
         debug {
@@ -46,6 +51,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -54,6 +64,7 @@ dependencies {
     implementation deps.appcompat
     implementation deps.constraint
     implementation deps.design
+    implementation deps.exifinterface
     implementation deps.smartRefresh
     implementation deps.smartRefreshHeader
     implementation deps.flycoTabLayout
@@ -64,18 +75,18 @@ dependencies {
     implementation deps.gson
     implementation deps.eventbus
     implementation deps.multidex
+    implementation deps.bugly
+    implementation deps.buglyNative
     implementation deps.glide
     annotationProcessor deps.glideCompiler
-    //Bmob 后端云
-    //implementation 'cn.bmob.android:bmob-sdk:3.7.4'
-    //Bmob IM
-    //implementation 'cn.bmob.android:bmob-im:2.1.4@aar'
+    //Bmob IM & 后端云
     implementation 'cn.bmob.android:bmob-im:2.1.4@aar'
     implementation 'cn.bmob.android:bmob-sdk:3.7.4'
     implementation 'com.just.agentweb:agentweb:4.1.3'
     implementation project(':plugin_core')
     implementation project(':plugin_im')
     implementation project(':plugin_aop')
+    implementation project(':module_video')
     implementation project(':plugin_spa_skin_default')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

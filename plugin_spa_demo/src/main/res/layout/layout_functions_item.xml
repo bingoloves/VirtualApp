@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#E1F5F1"
-    android:paddingTop="15dp"
-    android:paddingBottom="15dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:padding="10dp"
     app:xui_radius="4dp">
     <TextView
         android:id="@+id/tv_name"

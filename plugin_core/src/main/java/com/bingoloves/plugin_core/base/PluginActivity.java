@@ -55,7 +55,6 @@ public class PluginActivity extends AppCompatActivity implements ActivityInterfa
         selfActivity = this;
     }
 
-
     @Override
     public void onStart() {
         super.onStart();

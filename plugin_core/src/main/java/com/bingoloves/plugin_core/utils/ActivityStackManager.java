@@ -1,8 +1,13 @@
 package com.bingoloves.plugin_core.utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -190,7 +195,6 @@ public class ActivityStackManager {
         }
         return null;
     }
-
 
     /**
      * 退出应用程序

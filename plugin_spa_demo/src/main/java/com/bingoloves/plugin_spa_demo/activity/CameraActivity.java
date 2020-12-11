@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.ImageFormat;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -38,12 +39,20 @@ import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.R;
+import com.bingoloves.plugin_spa_demo.camera.AutoFitTextureView;
 import com.bingoloves.plugin_spa_demo.camera.AutoTextureView;
+import com.bingoloves.plugin_spa_demo.camera.BitmapUtils;
+import com.bingoloves.plugin_spa_demo.camera.Camera2Util;
+import com.bingoloves.plugin_spa_demo.camera.CameraHelper;
+import com.bingoloves.plugin_spa_demo.camera.ICamera2;
 import com.gyf.immersionbar.ImmersionBar;
 
 import java.io.File;
@@ -72,36 +81,51 @@ import cn.cqs.im.base.BaseActivity;
  * @UpdateDate: 2020/11/30
  */
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class CameraActivity extends BaseActivity {
+public class CameraActivity extends BaseActivity{
     @BindView(R.id.textureView)
-    AutoTextureView mTextureView;
+    AutoFitTextureView mTextureView;
     @BindView(R.id.toolbar)
     CustomToolbar toolbar;
+    //底部操作视图
+    @BindView(R.id.rl_opt)
+    RelativeLayout optRl;
+    @BindView(R.id.iv_photo)
+    ImageView previewIv;
 
     @SuppressLint("MissingPermission")
-    @OnClick(R.id.iv_change_camera)
-    public void clickEvent(){
-        toast("切换摄像头");
-        if ("0".equals(mCameraId)) {
-            mCameraId = "1";
-        } else {
-            mCameraId = "0";
-        }
-        //关闭相机再开启另外个摄像头
-        if (mCaptureSession != null) {
-            mCaptureSession.close();
-            mCaptureSession = null;
-        }
-        if (mCameraDevice != null) {
-            mCameraDevice.close();
-            mCameraDevice = null;
-        }
-        try {
-            manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
+    @OnClick({R.id.iv_change_camera,R.id.btn_takePhoto})
+    public void clickEvent(View view){
+        switch (view.getId()){
+            case R.id.iv_change_camera:
+                toast("切换摄像头");
+                if ("0".equals(mCameraId)) {
+                    mCameraId = "1";
+                } else {
+                    mCameraId = "0";
+                }
+                //关闭相机再开启另外个摄像头
+                if (mCaptureSession != null) {
+                    mCaptureSession.close();
+                    mCaptureSession = null;
+                }
+                if (mCameraDevice != null) {
+                    mCameraDevice.close();
+                    mCameraDevice = null;
+                }
+                try {
+                    manager.openCamera(mCameraId, mStateCallback, mBackgroundHandler);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.btn_takePhoto:
+                //takePhoto();
+                break;
+             default:
+                 break;
         }
     }
+
 
     private static final int REQUEST_CAMERA_PERMISSION = 1;
     private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
@@ -191,7 +215,10 @@ public class CameraActivity extends BaseActivity {
     private CameraCharacteristics characteristics;
     private File mFile;
     private String fileName;
-
+    /**
+     * 相机拍摄帮助类
+     */
+    //private CameraHelper cameraHelper;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_camera;
@@ -201,7 +228,7 @@ public class CameraActivity extends BaseActivity {
     protected void initData() {
 
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void initView() {
         ImmersionBar.with(this).statusBarDarkFont(true).titleBar(toolbar).init();
@@ -209,6 +236,16 @@ public class CameraActivity extends BaseActivity {
         toolbar.back(v -> finish());
         fileName = System.currentTimeMillis() + ".jpg";
         mFile = new File(getExternalFilesDir(null), fileName);
+
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            return;
+//        }
+//        cameraHelper = new CameraHelper(this);
+//        cameraHelper.setTakePhotoListener(this);
+//        cameraHelper.setCameraReady(this);
+//        cameraHelper.setTextureView(mTextureView);
+//        cameraHelper.openCamera(ICamera2.CameraType.BACK);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -223,12 +260,16 @@ public class CameraActivity extends BaseActivity {
             mTextureView.setSurfaceTextureListener(mSurfaceTextureListener);
         }
     }
+    @Override
+    public void onPause() {
+        closeCamera();
+        stopBackgroundThread();
+        super.onPause();
+    }
     /**
      * SurfaceTextureListener  监听事件
      */
-    private final TextureView.SurfaceTextureListener mSurfaceTextureListener
-            = new TextureView.SurfaceTextureListener() {
-
+    private final TextureView.SurfaceTextureListener mSurfaceTextureListener = new TextureView.SurfaceTextureListener() {
         @RequiresApi(api = Build.VERSION_CODES.M)
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
@@ -319,12 +360,11 @@ public class CameraActivity extends BaseActivity {
 //                Size largest = Collections.max(
 //                        Arrays.asList(map.getOutputSizes(ImageFormat.YUV_420_888)),
 //                        new CompareSizesByArea());
-//                mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
-//                        ImageFormat.YUV_420_888, 2);
                 mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
-                        ImageFormat.JPEG, 1);
-                mImageReader.setOnImageAvailableListener(
-                        mOnImageAvailableListener, mBackgroundHandler);
+                        ImageFormat.YUV_420_888, 2);
+//                mImageReader = ImageReader.newInstance(largest.getWidth(), largest.getHeight(),
+//                        ImageFormat.JPEG, 1);
+                mImageReader.setOnImageAvailableListener(mOnImageAvailableListener, mBackgroundHandler);
 
                 //了解我们是否需要交换尺寸以获得相对于传感器的预览尺寸
                 int displayRotation = getWindowManager().getDefaultDisplay().getRotation();
@@ -374,11 +414,9 @@ public class CameraActivity extends BaseActivity {
                 // 将TextureView的宽高比与我们选择的预览大小相匹配。
                 int orientation = getResources().getConfiguration().orientation;
                 if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getWidth(), mPreviewSize.getHeight());
+                    mTextureView.setAspectRatio(mPreviewSize.getWidth(), mPreviewSize.getHeight());
                 } else {
-                    mTextureView.setAspectRatio(
-                            mPreviewSize.getHeight(), mPreviewSize.getWidth());
+                    mTextureView.setAspectRatio(mPreviewSize.getHeight(), mPreviewSize.getWidth());
                 }
 
                 // 检查 远光灯
@@ -475,6 +513,8 @@ public class CameraActivity extends BaseActivity {
         }
     }
 
+
+
     /**
      * 打开 BackgroundThread
      */
@@ -511,7 +551,7 @@ public class CameraActivity extends BaseActivity {
             mPreviewRequestBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
             mPreviewRequestBuilder.addTarget(surface);
             //添加这句话 可以在 mImageReader 监听回调中持续获取 预览图片
-//            mPreviewRequestBuilder.addTarget(mImageReader.getSurface());
+            //mPreviewRequestBuilder.addTarget(mImageReader.getSurface());
             mCameraDevice.createCaptureSession(Arrays.asList(surface, mImageReader.getSurface()),
                     new CameraCaptureSession.StateCallback() {
 
@@ -550,8 +590,7 @@ public class CameraActivity extends BaseActivity {
                         }
 
                         @Override
-                        public void onConfigureFailed(
-                                @NonNull CameraCaptureSession cameraCaptureSession) {
+                        public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
                         }
                     }, null
             );
@@ -706,35 +745,36 @@ public class CameraActivity extends BaseActivity {
     private final ImageReader.OnImageAvailableListener mOnImageAvailableListener = new ImageReader.OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader reader) {
-            Image mImage = reader.acquireNextImage();
-            ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
-            byte[] bytes = new byte[buffer.remaining()];
-            buffer.get(bytes);
-            FileOutputStream output = null;
-            try {
-                output = new FileOutputStream(mFile);
-                output.write(bytes);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                mImage.close();
-                if (null != output) {
-                    try {
-                        output.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            // 其次把文件插入到系统图库
-            try {
-                MediaStore.Images.Media.insertImage(getContentResolver(), mFile.getAbsolutePath(), fileName, null);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            // 最后通知图库更新
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(mFile.getPath())));
-            toast("保存成功");
+            LogUtils.e("11111111111");
+//            Image mImage = reader.acquireNextImage();
+//            ByteBuffer buffer = mImage.getPlanes()[0].getBuffer();
+//            byte[] bytes = new byte[buffer.remaining()];
+//            buffer.get(bytes);
+//            FileOutputStream output = null;
+//            try {
+//                output = new FileOutputStream(mFile);
+//                output.write(bytes);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            } finally {
+//                mImage.close();
+//                if (null != output) {
+//                    try {
+//                        output.close();
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//            // 其次把文件插入到系统图库
+//            try {
+//                MediaStore.Images.Media.insertImage(getContentResolver(), mFile.getAbsolutePath(), fileName, null);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//            // 最后通知图库更新
+//            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(mFile.getPath())));
+//            toast("保存成功");
 //            mBackgroundHandler.post(new ImageSaver(reader.acquireNextImage(), mFile));
 //            Image image = reader.acquireLatestImage();
 //            if (image != null) {
@@ -742,10 +782,9 @@ public class CameraActivity extends BaseActivity {
 //                int imageHeight = image.getHeight();
 //                byte[] data68 = Camera2Util.getBytesFromImageAsType(image, 2);
 //                int rgb[] = Camera2Util.decodeYUV420SP(data68, imageWidth, imageHeight);
-//                Bitmap bitmap2 = Bitmap.createBitmap(rgb, 0, imageWidth,
-//                        imageWidth, imageHeight, Bitmap.Config.ARGB_8888);
+//                Bitmap bitmap2 = Bitmap.createBitmap(rgb, 0, imageWidth, imageWidth, imageHeight, Bitmap.Config.ARGB_8888);
 //                Bitmap d65bitmap = BitmapUtils.rotateMyBitmap(BitmapUtils.ImgaeToNegative(bitmap2));
-//                svShow.setBitmap(d65bitmap);
+//                previewIv.setImageBitmap(d65bitmap);
 //                image.close();
 //            }
 //            setResult(AppConstant.RESULT_CODE.RESULT_OK);
@@ -858,8 +897,6 @@ public class CameraActivity extends BaseActivity {
             return choices[0];
         }
     }
-
-
 
 
     private static class CompareSizesByArea implements Comparator<Size> {
