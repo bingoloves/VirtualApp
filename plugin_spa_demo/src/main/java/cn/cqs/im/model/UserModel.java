@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.bingoloves.plugin_core.utils.log.LogUtils;
 import cn.cqs.im.bean.Friend;
-import com.bingoloves.plugin_spa_demo.bean.User;
+import cn.cqs.im.bean.User;
 import java.util.List;
 import cn.bmob.newim.BmobIM;
 import cn.bmob.newim.bean.BmobIMConversation;

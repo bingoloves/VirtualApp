@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.R;
 import cn.cqs.im.bean.AddFriendMessage;
-import com.bingoloves.plugin_spa_demo.bean.User;
+import cn.cqs.im.bean.User;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.gyf.immersionbar.ImmersionBar;

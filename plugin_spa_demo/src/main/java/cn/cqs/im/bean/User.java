@@ -1,9 +1,8 @@
-package com.bingoloves.plugin_spa_demo.bean;
+package cn.cqs.im.bean;
 
 import java.util.List;
 
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /**

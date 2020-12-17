@@ -14,15 +14,14 @@ import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_core.widget.CustomToolbar;
 import com.bingoloves.plugin_spa_demo.Constants;
 import com.bingoloves.plugin_spa_demo.R;
-import com.bingoloves.plugin_spa_demo.bean.User;
-import com.bingoloves.plugin_spa_demo.dao.UserDao;
+import cn.cqs.im.bean.User;
+
 import com.gyf.immersionbar.ImmersionBar;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.LogInListener;
-import cn.bmob.v3.listener.SaveListener;
 import cn.cqs.im.base.BaseActivity;
 import cn.cqs.im.model.UserModel;
 

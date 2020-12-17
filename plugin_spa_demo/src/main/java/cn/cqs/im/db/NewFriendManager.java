@@ -3,7 +3,7 @@ package cn.cqs.im.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
-import com.bingoloves.plugin_spa_demo.bean.User;
+import cn.cqs.im.bean.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

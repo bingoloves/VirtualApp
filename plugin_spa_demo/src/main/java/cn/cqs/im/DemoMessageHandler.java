@@ -9,7 +9,7 @@ import com.bingoloves.plugin_core.utils.log.LogUtils;
 import com.bingoloves.plugin_spa_demo.activity.MainActivity;
 import cn.cqs.im.bean.AddFriendMessage;
 import cn.cqs.im.bean.AgreeAddFriendMessage;
-import com.bingoloves.plugin_spa_demo.bean.User;
+import cn.cqs.im.bean.User;
 import org.greenrobot.eventbus.EventBus;
 import java.util.List;
 import java.util.Map;

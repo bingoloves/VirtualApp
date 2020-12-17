@@ -24,8 +24,8 @@ import com.bingoloves.plugin_spa_demo.R;
 import com.bingoloves.plugin_spa_demo.adapter.BaseViewPagerAdapter;
 import com.bingoloves.plugin_spa_demo.bean.MenuItem;
 import com.bingoloves.plugin_spa_demo.bean.TabEntity;
-import com.bingoloves.plugin_spa_demo.bean.User;
-import com.bingoloves.plugin_spa_demo.dao.UserDao;
+import cn.cqs.im.bean.User;
+
 import com.bingoloves.plugin_spa_demo.fragment.FunctionsFragment;
 import com.bingoloves.plugin_spa_demo.fragment.MineFragment;
 import com.bumptech.glide.Glide;
@@ -145,7 +145,7 @@ public class MainActivity extends BaseActivity implements DrawerLayout.DrawerLis
         ViewGroup.LayoutParams layoutParams = mDrawerView.getLayoutParams();
         layoutParams.width = Utils.getWidthAndHeight(getWindow())[0]*2/3;
         //当前登录用户信息
-        User currentUser = UserDao.getCurrentUser();
+        User currentUser = UserModel.getInstance().getCurrentUser();
         if (currentUser != null){
             userNameTv.setText(currentUser.getUsername());
             RequestOptions requestOptions = new RequestOptions().optionalCircleCrop().error(R.mipmap.head);

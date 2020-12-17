@@ -1,6 +1,6 @@
 package cn.cqs.im.listener;
 
-import com.bingoloves.plugin_spa_demo.bean.User;
+import cn.cqs.im.bean.User;
 
 import cn.bmob.newim.listener.BmobListener1;
 import cn.bmob.v3.exception.BmobException;

@@ -1,7 +1,5 @@
 package cn.cqs.im.bean;
 
-import com.bingoloves.plugin_spa_demo.bean.User;
-
 import cn.bmob.v3.BmobObject;
 
 /**好友表
