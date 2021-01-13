@@ -80,8 +80,10 @@ dependencies {
     implementation deps.glide
     annotationProcessor deps.glideCompiler
     //Bmob IM & 后端云
-    implementation 'cn.bmob.android:bmob-im:2.1.4@aar'
-    implementation 'cn.bmob.android:bmob-sdk:3.7.4'
+//    implementation 'cn.bmob.android:bmob-im:2.1.4@aar'
+//    implementation 'cn.bmob.android:bmob-sdk:3.7.4'
+    implementation 'cn.bmob.android:bmob-sdk:3.7.8'
+    implementation 'cn.bmob.android:bmob-im:2.1.5@aar'
     implementation 'com.just.agentweb:agentweb:4.1.3'
     implementation project(':plugin_core')
     implementation project(':plugin_im')
